@@ -1,0 +1,31 @@
+{
+  "name": "test2doc",
+  "version": "0.0.1",
+  "description": "Generate API docs based on tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackia/test2doc.js.git"
+  },
+  "keywords": [
+    "docs",
+    "documents",
+    "api",
+    "test"
+  ],
+  "author": "Stackia <jsq2627@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stackia/test2doc.js/issues"
+  },
+  "homepage": "https://github.com/stackia/test2doc.js#readme",
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
