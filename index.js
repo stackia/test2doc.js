@@ -47,7 +47,7 @@ class Action {
   }
   query (queries, returnProxy = false) {
     this.queries = capture(queries)
-    return returnProxy ? this.queries : capture.undo(queries, true)
+    return returnProxy ? this.queries : capture.undo(queries)
   }
   reqBody (body, returnProxy = false) {
     this.requestBody = capture(body)

@@ -69,12 +69,18 @@ function msonEscape (text) {
   return `${surrounder}${maxBacktickLength > 0 ? ' ' : ''}${text}${maxBacktickLength > 0 ? ' ' : ''}${surrounder}`
 }
 
-function objectToMson (object, rootName, indentLevel) {
+function objectToMson (object, rootName = '', indentLevel = 0, extraNewline = true, ignoreRootType = false) {
   let document = ''
   capture.traverse(object, node => {
     const docs = capture.docs(node.value)
     const nodeValue = capture.undo(node.value)
-    document += indent(indentLevel + node.depth)
+    let baseIndent = indentLevel + node.depth
+    let parent = node.parent
+    while (parent) {
+      baseIndent += parent.childenExtraIndent || 0
+      parent = parent.parent
+    }
+    document += indent(baseIndent)
     if (node.depth === 0) {
       document += `+ ${rootName}`
     } else if (node.key) {
@@ -84,31 +90,71 @@ function objectToMson (object, rootName, indentLevel) {
       if (node.isLeaf) document += ' '
     }
     const escapedValue = msonEscape(nodeValue)
-    if (node.isLeaf && escapedValue) document += `: ${escapedValue}`
+    if (node.isLeaf && escapedValue) {
+      if (node.key || node.depth === 0 && rootName) document += ': '
+      document += escapedValue
+    }
     let additions = []
-    let ignoreValueType = false
-    if (node.valueType === 'string') ignoreValueType = true
-    if (!node.isLeaf && node.valueType === 'object' && (node.key || node.depth === 0)) ignoreValueType = true
-    if (!ignoreValueType) additions.push(node.valueType)
+    if (docs.possibleValues.length) {
+      additions.push('enum')
+    } else {
+      let ignoreValueType = false
+      if (node.valueType === 'string') ignoreValueType = true
+      if (!node.isLeaf && node.valueType === 'object' && (node.key || (node.depth === 0 && rootName))) ignoreValueType = true
+      if (node.depth === 0 && ignoreRootType) ignoreValueType = true
+      if (!ignoreValueType) additions.push(node.valueType)
+    }
     if (docs.required) additions.push('required')
     if (docs.fixed) additions.push('fixed')
     if (docs.fixedType) additions.push('fixed-type')
     if (docs.nullable || nodeValue === null || nodeValue === undefined) additions.push('nullable')
-    if (docs.sampleValue !== undefined && docs.sampleValue === nodeValue) {
+    let sampleEmitted = false
+    let defaultEmitted = false
+    if (docs.sampleValues.length === 1 && JSON.stringify(docs.sampleValues[0]) === JSON.stringify(nodeValue)) {
       additions.push('sample')
-    } else if (docs.defaultValue !== undefined && docs.defaultValue === nodeValue) {
+      sampleEmitted = true
+    } else if (docs.defaultValue !== undefined && JSON.stringify(docs.defaultValue) === JSON.stringify(nodeValue)) {
       additions.push('default')
+      defaultEmitted = true
     }
     additions = additions.join(', ')
     if (additions) document += ` (${additions})`
     if (node.depth > 0 && docs.descriptions[0]) document += ` - ${docs.descriptions[0]}`
     document += '\n'
+    let needChildrenHeader = false
     if (node.depth > 0 && docs.descriptions.length > 1) {
       document += '\n'
-      document += docs.descriptions.slice(1).map(d => `${indent(indentLevel + node.depth + 1)}${d}\n\n`).join('')
+      document += docs.descriptions.slice(1).map(d => `${indent(baseIndent + 1)}${d}\n\n`).join('')
+      needChildrenHeader = true
+    }
+    if (docs.possibleValues.length) {
+      document += objectToMson(docs.possibleValues, 'Members', baseIndent + 1, false, true)
+      needChildrenHeader = true
+    }
+    if (docs.defaultValue && !defaultEmitted) {
+      document += objectToMson(docs.defaultValue, 'Default', baseIndent + 1, false, true)
+      needChildrenHeader = true
+    }
+    if (docs.sampleValues.length && !sampleEmitted) {
+      document += docs.sampleValues.map(sampleValue => {
+        return objectToMson(sampleValue, 'Sample', baseIndent + 1, false, true)
+      }).join('')
+      needChildrenHeader = true
+    }
+    if (needChildrenHeader && !node.isLeaf) {
+      document += `${indent(baseIndent + 1)}+ `
+      if (node.valueType === 'object') {
+        document += 'Properties'
+      } else if (docs.possibleValues.length) {
+        document += 'Sample'
+      } else {
+        document += 'Items'
+      }
+      document += '\n'
+      node.childenExtraIndent = 1
     }
   })
-  document += '\n'
+  if (extraNewline) document += '\n'
   return document
 }
 

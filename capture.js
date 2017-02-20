@@ -18,6 +18,18 @@ const undefinedWrapper = {
   }
 }
 
+const defaultDocs = {
+  descriptions: [],
+  required: undefined,
+  nullable: undefined,
+  fixed: undefined,
+  fixedType: undefined,
+  possibleValues: [],
+  defaultValue: undefined,
+  sampleValues: [],
+  statusCode: undefined
+}
+
 function isWrapperType (obj) {
   return obj instanceof Number ||
     obj instanceof String ||
@@ -34,30 +46,22 @@ function wrap (object) {
 function capture (object, path, contextToMerge) {
   let context
   if (contextToMerge) {
-    context = {}
-    context.object = contextToMerge.object
-    context.path = path
-    context.propertyProxies = Object.keys(contextToMerge.propertyProxies).map(property => {
+    context = {
+      object: object,
+      path: path,
+      propertyProxies: {},
+      docs: clone(contextToMerge.docs)
+    }
+    for (const property of Object.keys(contextToMerge.propertyProxies)) {
       const propertyContext = contextToMerge.propertyProxies[property][contextSymbol]
-      return capture(propertyContext.object, [...path, property], propertyContext)
-    })
-    context.docs = clone(contextToMerge.docs)
+      context.propertyProxies[property] = capture(propertyContext.object, [...path, property], propertyContext)
+    }
   } else {
     context = {
       object,
       path: path || [],
       propertyProxies: {},
-      docs: {
-        descriptions: [],
-        required: undefined,
-        nullable: undefined,
-        fixed: undefined,
-        fixedType: undefined,
-        possibleValues: [],
-        defaultValue: undefined,
-        sampleValue: undefined,
-        statusCode: undefined
-      }
+      docs: clone(defaultDocs)
     }
   }
   object = wrap(object)
@@ -94,8 +98,8 @@ function capture (object, path, contextToMerge) {
       context.docs.defaultValue = defaultValue
       return context.proxy
     },
-    sample (sampleValue) {
-      context.docs.sampleValue = sampleValue
+    sample (...sampleValues) {
+      context.docs.sampleValues = sampleValues
       return context.proxy
     },
     status (statusCode) {
@@ -174,7 +178,9 @@ function traverse (object, visitFn, map = false) {
 
     let newObject = visitFn(node)
     if (map) {
-      if (typeOf(newObject) === 'object' && newObject) newObject = Object.assign({}, newObject)
+      const newObjectType = typeOf(newObject)
+      if (newObjectType === 'object' && newObject) newObject = Object.assign({}, newObject)
+      else if (newObjectType === 'array') newObject = newObject.slice()
       if (node.depth === 0) {
         object = newObject
       } else {
@@ -198,7 +204,7 @@ function uncapture (object) {
 
 function docs (object) {
   const context = object[contextSymbol]
-  return context ? context.docs : {}
+  return context ? context.docs : clone(defaultDocs)
 }
 
 module.exports = capture
