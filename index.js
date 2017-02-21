@@ -13,6 +13,11 @@ class Action {
       descriptions: [],
       url: ''
     }
+    this.parameters = []
+    this.queries = []
+    this.requestBodies = []
+    this.responseBodies = []
+    this.example = 0
     for (const method of methods) {
       this[method] = (url, params) => this.method(method).url(url, params)
     }
@@ -41,21 +46,30 @@ class Action {
   val (value, ...descriptions) {
     return capture(value).desc(...descriptions)
   }
+  anotherExample () {
+    this.example++
+    return this
+  }
   params (parameters, returnProxy = false) {
-    this.parameters = capture(parameters)
-    return returnProxy ? this.parameters : capture.undo(parameters)
+    const captured = capture(parameters)
+    this.parameters[this.example] = captured
+    return returnProxy ? captured : capture.undo(parameters)
   }
   query (queries, returnProxy = false) {
-    this.queries = capture(queries)
-    return returnProxy ? this.queries : capture.undo(queries)
+    const captured = capture(queries)
+    this.queries[this.example] = captured
+    return returnProxy ? captured : capture.undo(queries)
   }
-  reqBody (body, returnProxy = false) {
-    this.requestBody = capture(body)
-    return returnProxy ? this.requestBody : capture.undo(body)
+  reqBody (body, description, returnProxy = false) {
+    const captured = capture(body)
+    if (description) captured.desc(description)
+    this.requestBodies[this.example] = captured
+    return returnProxy ? captured : capture.undo(body)
   }
   resBody (body) {
-    this.responseBody = capture(body)
-    return this.responseBody
+    const captured = capture(body)
+    this.responseBodies[this.example] = captured
+    return captured
   }
   is (collectFn) {
     const collect = collectFn(this)
@@ -125,6 +139,9 @@ class Group {
   is (collectFn) {
     const collect = collectFn(this)
     return collect instanceof Promise ? collect.then(() => this) : this
+  }
+  uncapture (object) {
+    return capture.undo(object)
   }
   emit (file, generator = apibGenerator, options = {}) {
     fs.writeFileSync(file, generator.generate(this, options))

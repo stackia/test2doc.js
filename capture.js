@@ -203,6 +203,7 @@ function uncapture (object) {
 }
 
 function docs (object) {
+  if (object === null || object === undefined) return clone(defaultDocs)
   const context = object[contextSymbol]
   return context ? context.docs : clone(defaultDocs)
 }

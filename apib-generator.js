@@ -10,7 +10,8 @@ function convertPath (path, queries) {
   }
   path = pathToRegexp.compile(path)(parameters)
   if (queries) {
-    path += `{?${Object.keys(queries).join(',')}}`
+    const keys = Object.keys(queries)
+    if (keys.length) path += `{?${keys.join(',')}}`
   }
   return path.startsWith('/') ? path : `/${path}`
 }
@@ -19,12 +20,12 @@ function indent (level) {
   return '    '.repeat(level)
 }
 
-function generateDocForParameters (parameters) {
-  let document = '+ Parameters\n'
+function generateDocForParameters (parameters, indentLevel = 0) {
+  let document = `${indent(indentLevel)}+ Parameters\n`
   for (const parameterName of Object.keys(parameters)) {
     const docs = capture.docs(parameters[parameterName])
     const parameterValue = capture.undo(parameters[parameterName])
-    document += `${indent(1)}+ ${parameterName}`
+    document += `${indent(indentLevel + 1)}+ ${parameterName}`
     if (parameterValue) {
       document += `: \`${parameterValue}\``
     }
@@ -38,13 +39,13 @@ function generateDocForParameters (parameters) {
     if (docs.descriptions[0]) document += ` - ${docs.descriptions[0]}`
     document += '\n'
     let details = ''
-    details += docs.descriptions.slice(1).map(d => `${indent(2)}${d}\n\n`).join('')
+    details += docs.descriptions.slice(1).map(d => `${indent(indentLevel + 2)}${d}\n\n`).join('')
     if (docs.defaultValue !== undefined) {
-      details += `${indent(2)}+ Default: \`${docs.defaultValue}\`\n\n`
+      details += `${indent(indentLevel + 2)}+ Default: \`${docs.defaultValue}\`\n\n`
     }
     if (docs.possibleValues.length) {
-      details += `${indent(2)}+ Members\n`
-      details += docs.possibleValues.map(v => `${indent(3)}+ \`${v}\`\n`).join('')
+      details += `${indent(indentLevel + 2)}+ Members\n`
+      details += docs.possibleValues.map(v => `${indent(indentLevel + 3)}+ \`${v}\`\n`).join('')
       details += '\n'
     }
     if (details) document += `\n${details}`
@@ -54,7 +55,7 @@ function generateDocForParameters (parameters) {
 }
 
 function msonEscape (text) {
-  if (typeof text !== 'string') return text
+  if (typeof text !== 'string') text = text.toString()
   const reservedKeywords = [':', '(', ')', '<', '>', '{', '}', '[', ']', '_', '*', '-', '+', '`',
     'Property', 'Properties', 'Item', 'Items', 'Member', 'Members', 'Include', 'One of', 'Sample',
     'Trait', 'Traits', 'Parameter', 'Parameters', 'Attribute', 'Attributes', 'Filter', 'Validation', 'Choice', 'Choices', 'Enumeration', 'Enum', 'Object', 'Array', 'Element', 'Elements', 'Description']
@@ -202,13 +203,15 @@ function generate (group) {
       document += action.group.depth === 1 ? '## ' : '### '
       let trimLeft = ''
       let parent = action.group
-      while (parent) {
-        trimLeft = `${parent.basePath}/${trimLeft}`
+      while (true) {
+        if (parent.docs.basePath) trimLeft = `${parent.docs.basePath}/${trimLeft}`
+        if (!parent.parent) break
         parent = parent.parent
       }
       let url = action.docs.url.replace(pathToRegexp(trimLeft, { end: false }), '')
       if (url) {
-        url = convertPath(action.docs.url, action.queries)
+        url = action.docs.url.replace(pathToRegexp(parent.docs.basePath, { end: false }), '')
+        url = convertPath(url, Object.assign({}, ...action.queries))
       }
       if (action.docs.title) {
         document += `${action.docs.title} [${action.docs.method}`
@@ -220,23 +223,34 @@ function generate (group) {
       document += '\n\n'
       document += action.docs.descriptions.reduce((p, c) => p + c + '\n\n', '')
 
-      // Action parameters
-      if (action.parameters || action.queries) document += generateDocForParameters(Object.assign({}, action.parameters, action.queries))
+      const cycle = Math.max(action.parameters.length, action.queries.length, action.requestBodies.length, action.responseBodies.length)
+      for (let i = 0; i < cycle; ++i) {
+        const hasParameters = action.parameters[i] || action.queries[i]
+        // Action parameters
+        if (i === 0 && hasParameters) {
+          document += generateDocForParameters(Object.assign({}, action.parameters[i], action.queries[i]))
+        }
 
-      // Action request
-      if (action.requestBody) {
-        document += '+ Request'
-        const docs = capture.docs(action.requestBody)
-        if (docs.descriptions[0]) document += ` ${docs.descriptions[0]}`
-        document += ' (application/json)\n\n'
-        document += objectToMson(action.requestBody, 'Attributes', 1)
-      }
+        // Action request
+        if (action.requestBodies[i] || hasParameters) {
+          document += '+ Request'
+          const docs = capture.docs(action.requestBodies[i])
+          if (docs.descriptions[0]) document += ` ${docs.descriptions[0]}`
+          document += ' (application/json)\n\n'
+          if (i > 0 && hasParameters) {
+            document += generateDocForParameters(Object.assign({}, action.parameters[i], action.queries[i]), 1)
+          }
+          if (action.requestBodies[i]) {
+            document += objectToMson(action.requestBodies[i], 'Attributes', 1)
+          }
+        }
 
-      // Action response
-      if (action.responseBody) {
-        const docs = capture.docs(action.responseBody)
-        document += `+ Response ${docs.statusCode || 200} (application/json)\n\n`
-        document += objectToMson(action.responseBody, 'Attributes', 1)
+        // Action response
+        if (action.responseBodies[i]) {
+          const docs = capture.docs(action.responseBodies[i])
+          document += `+ Response ${docs.statusCode || 200} (application/json)\n\n`
+          document += objectToMson(action.responseBodies[i], 'Attributes', 1)
+        }
       }
     }
   }
