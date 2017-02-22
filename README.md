@@ -89,9 +89,9 @@ Some methods of `action` object are:
 
 *Full list can be found at [API references](#api-references) section.*
 
-Methods like `doc.resBody(body)` / `doc.val(value, ...descriptions)` and so on returns an [ES6 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) of the object passed in. So we can add custom methods to these objects like `desc(...descriptions)`, `required()`, etc. However because JS doesn't allow proxy non-object value (number / null / undefined etc.), we will create wrapper objects on these values. If these wrapper objects don't work well with your assertion / request library, you can use `doc.uncapture(object)` to get the original value.
+Methods like `doc.resBody(body)` / `doc.val(value, ...descriptions)` and so on returns an [ES6 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) of the object passed in. So we can add custom methods to these objects like `desc(...descriptions)`, `required()`, etc. However because JS doesn't allow proxying non-object value (number / null / undefined etc.), we will create wrapper objects around these values. If these wrapper objects don't work well with your assertion / request library, you can use `doc.uncapture(object)` to get the original value.
 
-After you have collected all the info needed to build the documentations, call `emit` on the root group to emit the actual documentation file. Generally you will do this in a global `after` hook.
+Once you have collected all the info needed to build the documentations, call `emit` on the root group to emit the actual documentation file. Generally you will do this in a global `after` hook.
 
 ## API references
 
