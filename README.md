@@ -1,4 +1,4 @@
-# test2doc.js
+# test2doc.js - Build API docs from your tests
 
 [![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![David](https://img.shields.io/david/stackia/test2doc.js.svg)](https://david-dm.org/stackia/test2doc.js) [![Gitter](https://img.shields.io/gitter/room/test2doc-js/Lobby.svg)](https://gitter.im/test2doc-js/Lobby)
 
