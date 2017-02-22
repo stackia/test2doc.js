@@ -75,6 +75,9 @@ class Action {
     const collect = collectFn(this)
     return collect instanceof Promise ? collect.then(() => this) : this
   }
+  uncapture (object) {
+    return capture.undo(object)
+  }
 }
 
 class Group {
@@ -115,6 +118,9 @@ class Group {
       this.params(parameters)
     }
     return this
+  }
+  val (value, ...descriptions) {
+    return capture(value).desc(...descriptions)
   }
   params (parameters, returnProxy = false) {
     this.parameters = capture(parameters)
