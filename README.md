@@ -1,4 +1,4 @@
- # test2doc.js
+# test2doc.js
 
 [![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![David](https://img.shields.io/david/stackia/test2doc.js.svg)](https://david-dm.org/stackia/test2doc.js) [![Gitter](https://img.shields.io/gitter/room/test2doc-js/Lobby.svg)](https://gitter.im/test2doc-js/Lobby)
 
@@ -6,7 +6,7 @@ test2doc.js helps you integrate API documentation generation to your test flow w
 
 You write something like this:
 
-```
+```javascript
 const doc = require('test2doc')
 const request = require('supertest') // We use supertest as the HTTP request library
 require('should') // and use should as the assertion library
@@ -63,7 +63,7 @@ Once installed it can now be referenced by simply calling `require('test2doc')`.
 
 First require this library, for convenience we use `doc` as the imported variable name:
 
-```
+```javascript
 const doc = require('test2doc')
 ```
 
@@ -87,7 +87,7 @@ Some methods of `action` object are:
 - `doc.get(url, parameters)` - Capture a string as the url, returns this url so you call pass to your HTTP request library
 - `doc.resBody(body)` - Capture an object as the response body, returns an proxy of this object
 
-*Full list can be found at API references section.*
+*Full list can be found at [API references](#api-references) section.*
 
 Methods like `doc.resBody(body)` / `doc.val(value, ...descriptions)` and so on returns an [ES6 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) of the object passed in. So we can add custom methods to these objects like `desc(...descriptions)`, `required()`, etc. However because JS doesn't allow proxy non-object value (number / null / undefined etc.), we will create wrapper objects on these values. If these wrapper objects don't work well with your assertion / request library, you can use `doc.uncapture(object)` to get the original value.
 
@@ -157,12 +157,11 @@ After you have collected all the info needed to build the documentations, call `
     - an example = params + query + reqBody + resBody
     - return: this action
     - e.g.
-
-> doc.params ...blahblah... doc.query ...blahblah... doc.reqBody
-> ...blahblah... doc.resBody
->     doc.anotherExample() // Divide into two examples in a same code block
->     doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... doc.resBody
-
+```
+doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... doc.resBody
+doc.anotherExample() // Divide into two examples in a same code block
+doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... doc.resBody
+```
 - `params (parameters, returnProxy = false)` - Same as `group`.`params`, except this is for action
 - `query (queries, returnProxy = false)` - Same as `group`.`query`, except this is for action
 - `reqBody (body, description, returnProxy = false)` - Capture an object as the request body and give it a description
@@ -202,4 +201,4 @@ After you have collected all the info needed to build the documentations, call `
 
 # License
 
-The project is released under MIT License.
+The project is released under [MIT License](https://github.com/stackia/test2doc.js/blob/master/LICENSE).
