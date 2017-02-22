@@ -105,6 +105,9 @@ function capture (object, path, contextToMerge) {
     status (statusCode) {
       context.docs.statusCode = statusCode
       return context.proxy
+    },
+    uncapture () {
+      return uncapture(context.proxy)
     }
   })
   for (const propertySymbol of [Symbol('valueOf'), Symbol('toString')]) {
