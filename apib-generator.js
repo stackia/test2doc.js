@@ -209,9 +209,10 @@ function generate (group) {
         parent = parent.parent
       }
       let url = action.docs.url.replace(pathToRegexp(trimLeft, { end: false }), '')
-      if (url) {
+      let actionAllQueries = Object.assign({}, ...action.queries)
+      if (url || JSON.stringify(actionAllQueries) !== JSON.stringify(parent.queries || {})) {
         url = action.docs.url.replace(pathToRegexp(parent.docs.basePath, { end: false }), '')
-        url = convertPath(url, Object.assign({}, ...action.queries))
+        url = convertPath(url, actionAllQueries)
       }
       if (action.docs.title) {
         document += `${action.docs.title} [${action.docs.method}`
@@ -232,7 +233,7 @@ function generate (group) {
         }
 
         // Action request
-        if (action.requestBodies[i] || hasParameters) {
+        if (action.requestBodies[i] || (i > 0 && hasParameters)) {
           document += '+ Request'
           const docs = capture.docs(action.requestBodies[i])
           if (docs.descriptions[0]) document += ` ${docs.descriptions[0]}`
