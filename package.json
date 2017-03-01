@@ -1,7 +1,7 @@
 {
   "name": "test2doc",
-  "version": "0.0.3",
-  "description": "Generate API docs based on tests",
+  "version": "0.0.4",
+  "description": "Build API docs from your tests",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
