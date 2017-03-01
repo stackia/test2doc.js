@@ -8,7 +8,7 @@ function convertPath (path, queries) {
   for (const key of keys) {
     parameters[key.name] = `{${key.name}}`
   }
-  path = pathToRegexp.compile(path)(parameters)
+  path = pathToRegexp.compile(path)(parameters).replace('%7B', '{').replace('%7D', '}')
   if (queries) {
     const keys = Object.keys(queries)
     if (keys.length) path += `{?${keys.join(',')}}`
