@@ -152,6 +152,9 @@ function traverse (object, visitFn, map = false) {
     let children = []
     node.valueType = typeOf(node.value)
     if (node.valueType === 'object' && node.value) {
+      if (node.value[contextSymbol] && !node.value[contextSymbol].object) {
+        return []
+      }
       children = Object.keys(node.value).map(key => {
         return {
           key: key,

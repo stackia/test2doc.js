@@ -90,10 +90,12 @@ function objectToMson (object, rootName = '', indentLevel = 0, extraNewline = tr
       document += `+`
       if (node.isLeaf) document += ' '
     }
-    const escapedValue = msonEscape(nodeValue)
-    if (node.isLeaf && escapedValue) {
-      if (node.key || node.depth === 0 && rootName) document += ': '
-      document += escapedValue
+    if (nodeValue) {
+      const escapedValue = msonEscape(nodeValue)
+      if (node.isLeaf && escapedValue) {
+        if (node.key || node.depth === 0 && rootName) document += ': '
+        document += escapedValue
+      }
     }
     let additions = []
     if (docs.possibleValues.length) {
