@@ -55,7 +55,7 @@ function generateDocForParameters (parameters, indentLevel = 0) {
 }
 
 function msonEscape (text) {
-  if (typeof text !== 'string') text = text.toString()
+  if (typeof text !== 'string') text = String(text)
   const reservedKeywords = [':', '(', ')', '<', '>', '{', '}', '[', ']', '_', '*', '-', '+', '`',
     'Property', 'Properties', 'Item', 'Items', 'Member', 'Members', 'Include', 'One of', 'Sample',
     'Trait', 'Traits', 'Parameter', 'Parameters', 'Attribute', 'Attributes', 'Filter', 'Validation', 'Choice', 'Choices', 'Enumeration', 'Enum', 'Object', 'Array', 'Element', 'Elements', 'Description']
