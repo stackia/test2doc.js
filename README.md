@@ -11,7 +11,7 @@ const doc = require('test2doc')
 const request = require('supertest') // We use supertest as the HTTP request library
 require('should') // and use should as the assertion library
 
-// If you are using Koa, you should exports app.callback() in your main file
+// For Koa, you should exports app.listen() or app.callback() in your app entry
 const app = require('./my-express-app.js')
 
 after(function () {
