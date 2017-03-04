@@ -36,5 +36,8 @@
     "methods": "^1.1.2",
     "path-to-regexp": "^1.7.0",
     "symbol-description": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
   }
 }
