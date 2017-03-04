@@ -201,6 +201,13 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
 - `uncapture ()` - uncapture this
     - return: the uncaptured original object for this
 
+# Roadmap
+
+- [ ] Add unit tests and integrate with Travis CI
+- [ ] Incremental document generation
+- [ ] Swagger support
+- [ ] Write an extension for supertest to simplify grammer
+
 # License
 
 The project is released under [MIT License](https://github.com/stackia/test2doc.js/blob/master/LICENSE).
