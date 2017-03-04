@@ -26,7 +26,7 @@ function generateDocForParameters (parameters, indentLevel = 0) {
     const docs = capture.docs(parameters[parameterName])
     const parameterValue = capture.undo(parameters[parameterName])
     document += `${indent(indentLevel + 1)}+ ${parameterName}`
-    if (parameterValue) {
+    if (parameterValue != null) {
       document += `: \`${parameterValue}\``
     }
     let additions = []
