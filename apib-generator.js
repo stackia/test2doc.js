@@ -56,11 +56,11 @@ function generateDocForParameters (parameters, indentLevel = 0) {
 
 function msonEscape (text) {
   if (typeof text !== 'string') text = String(text)
-  const reservedKeywords = [':', '(', ')', '<', '>', '{', '}', '[', ']', '_', '*', '-', '+', '`',
-    'Property', 'Properties', 'Item', 'Items', 'Member', 'Members', 'Include', 'One of', 'Sample',
+  const reservedCharacters = [':', '(', ')', '<', '>', '{', '}', '[', ']', '_', '*', '-', '+', '`']
+  const reservedKeywords = ['Property', 'Properties', 'Item', 'Items', 'Member', 'Members', 'Include', 'One of', 'Sample',
     'Trait', 'Traits', 'Parameter', 'Parameters', 'Attribute', 'Attributes', 'Filter', 'Validation', 'Choice', 'Choices', 'Enumeration', 'Enum', 'Object', 'Array', 'Element', 'Elements', 'Description']
   const textToTest = text.toLowerCase()
-  const shouldEscape = reservedKeywords.some(keyword => textToTest.includes(keyword.toLowerCase()))
+  const shouldEscape = reservedCharacters.some(character => textToTest.includes(character.toLowerCase())) || reservedKeywords.some(keyword => textToTest === keyword.toLowerCase())
   if (!shouldEscape) return text
   let maxBacktickLength = 0
   for (const match of textToTest.match(/`+/gi) || []) {
