@@ -85,7 +85,7 @@ suite('capture.js', function () {
       test(`should be able to chain ${methodName}() on returned proxy object`, function () {
         const proxy = capture({})
         proxy[methodName].should.be.a.Function()
-        proxy[methodName]()[methodName].should.be.a.Function()
+        proxy[methodName]('blah', 'blah', 'blah', 'blah')[methodName].should.be.a.Function()
       })
     })
 

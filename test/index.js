@@ -1,6 +1,6 @@
 const should = require('should')
 
-const index = require('../index')
+const index = require('../')
 const Group = require('../lib/group')
 
 suite('index.js', function () {
