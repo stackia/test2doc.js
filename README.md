@@ -207,6 +207,7 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
 - [ ] Incremental document generation
 - [ ] Swagger support
 - [ ] Write an extension for supertest to simplify grammer
+- [ ] CONTRIBUTION guide
 
 # License
 
