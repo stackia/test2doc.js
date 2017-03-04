@@ -26,7 +26,7 @@ function generateDocForParameters (parameters, indentLevel = 0) {
     const docs = capture.docs(parameters[parameterName])
     const parameterValue = capture.undo(parameters[parameterName])
     document += `${indent(indentLevel + 1)}+ ${parameterName}`
-    if (parameterValue != null) {
+    if (parameterValue !== null && parameterValue !== undefined) {
       document += `: \`${parameterValue}\``
     }
     let additions = []
@@ -90,7 +90,7 @@ function objectToMson (object, rootName = '', indentLevel = 0, extraNewline = tr
       document += `+`
       if (node.isLeaf) document += ' '
     }
-    if (nodeValue) {
+    if (nodeValue !== null && nodeValue !== undefined) {
       const escapedValue = msonEscape(nodeValue)
       if (node.isLeaf && escapedValue) {
         if (node.key || node.depth === 0 && rootName) document += ': '
