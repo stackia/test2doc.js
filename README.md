@@ -134,6 +134,7 @@ Once you have collected all the info needed to build the documentations, call `e
     - return: an uncaptured object, with all its children and nested children uncaptured
 - `emit (file, generator = apibGenerator, options = {})` - generate the actual documentation file
     - `file` can be a filename or a file descriptor. It's the same object passed into `fs.writeFileSync`.
+    - If `file` is omitted, the generated text will be the return value.
     - Currently there is only apibGenerator available with no options. We will support swagger in the future.
     - return: void
 
