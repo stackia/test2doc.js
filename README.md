@@ -199,6 +199,14 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
 - `status (statusCode)` - mark the response HTTP status code for this
     - Only makes sense when called on the root of captured response body
     - return: this captured object
+- `offset (offset)` - specify the offset in the array to be included in the documents
+    - Only makes sense if this is an array
+    - Useful if you only want to include a subset of this array in the documents
+    - return: this captured object
+- `limit (limit)` - specify the number of items from the offset in the array to be included in the documents
+    - Only makes sense if this is an array
+    - Useful if you only want to include a subset of this array in the documents
+    - return: this captured object
 - `uncapture ()` - uncapture this
     - return: the uncaptured original object for this
 
