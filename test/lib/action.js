@@ -1,5 +1,4 @@
 const should = require('should')
-const fs = require('fs')
 
 const Group = require('../../lib/group')
 const capture = require('../../lib/capture')
