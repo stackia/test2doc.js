@@ -14,6 +14,25 @@ suite('group.js', function () {
       })
     })
 
+    suite('#group()', function () {
+      test('should reuse an existing child group for a same title', function () {
+        const group = new Group()
+        const childGroup = group.group('Sample Group')
+        group.group('Sample Group').should.equal(childGroup)
+      })
+    })
+
+    suite('#action()', function () {
+      test('should reuse an existing child action for a same title and treat as another example', function () {
+        const group = new Group()
+        const action = group.action('Sample Action')
+        const exampleIndex = action.example
+        const anotherAction = group.action('Sample Action')
+        anotherAction.should.equal(action)
+        anotherAction.example.should.equal(exampleIndex + 1)
+      })
+    })
+
     suite('#is()', function () {
       test('should call `collectFn` with itself as the parameter', function () {
         const group = new Group()
