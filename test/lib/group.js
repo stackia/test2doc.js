@@ -1,7 +1,8 @@
-require('should')
+const should = require('should')
 const fs = require('fs')
 
 const Group = require('../../lib/group')
+const capture = require('../../lib/capture')
 
 suite('group.js', function () {
   suite('#Group', function () {
@@ -10,6 +11,32 @@ suite('group.js', function () {
         const group = new Group()
         group[methodName].should.be.a.Function()
         group[methodName]('blah', 'blah', 'blah', 'blah')[methodName].should.be.a.Function()
+      })
+    })
+
+    suite('#is()', function () {
+      test('should call `collectFn` with itself as the parameter', function () {
+        const group = new Group()
+        group.is(doc => {
+          doc.should.equal(group)
+        })
+      })
+
+      test('should return itself if `collectFn` is synchronized', function () {
+        const group = new Group()
+        group.is(doc => {}).should.equal(group)
+      })
+
+      test('should return a promise that resolves with itself if `collectFn` returns a promise', function () {
+        const group = new Group()
+        group.is(doc => new Promise(resolve => resolve())).then(doc => doc.should.equal(group))
+      })
+    })
+
+    suite('#uncapture()', function () {
+      test('should return an uncaptured object for a proxy', function () {
+        const group = new Group()
+        should(group.uncapture(capture(null))).be.null()
       })
     })
 
