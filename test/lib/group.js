@@ -6,7 +6,7 @@ const capture = require('../../lib/capture')
 
 suite('group.js', function () {
   suite('#Group', function () {
-    ['title', 'desc', 'scheme', 'host', 'basePath'].forEach(methodName => {
+    ['title', 'desc', 'scheme', 'host', 'version', 'basePath'].forEach(methodName => {
       test(`should be able to chain ${methodName}() method`, function () {
         const group = new Group()
         group[methodName].should.be.a.Function()

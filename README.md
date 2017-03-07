@@ -112,6 +112,8 @@ Once you have collected all the info needed to build the documentations, call `e
 - `host (host)` - set hostname for this group
     - Only hostname, without 'http://' or trailing slash.
     - return: this group
+- `version (version)` - set API version for this group
+    - return: this group
 - `basePath (basePath, parameters)` - set base path for this group
     - e.g. `basePath('/v0/product/:id', { id: doc.val(123, 'Product ID') )`
     - return: this group
