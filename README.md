@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![Travis CI](https://travis-ci.org/stackia/test2doc.js.svg?branch=master)](https://travis-ci.org/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/status.svg)](https://david-dm.org/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/dev-status.svg)](https://david-dm.org/stackia/test2doc.js?type=dev) [![Gitter](https://img.shields.io/gitter/room/test2doc-js/Lobby.svg)](https://gitter.im/test2doc-js/Lobby)
 
-test2doc.js helps you integrate API documentation generation to your test flow with little footprints.
+test2doc.js helps you seamlessly integrate API documentation generation to your test flow.
 
 You write something like this:
 
@@ -15,7 +15,7 @@ require('should') // and use should as the assertion library
 const app = require('./my-express-app.js')
 
 after(function () {
-  doc.emit('api-documentation.apib')
+  doc.emit('api-documentation.apib') // Or doc.emit('api-documentation.yaml', 'swagger') if you like Swagger
 })
 
 doc.group('Products').is(doc => {
@@ -27,7 +27,7 @@ doc.group('Products').is(doc => {
         return request(app)
           .get(doc.get('/products'))
           .query(doc.query({
-            minPrice: doc.val(10, 'Only products of which price >= this value should be returned')
+            minPrice: doc.val(10, 'Only products of which price >= this value should be returned').required()
           }))
           .expect(200)
           .then(res => {
@@ -35,7 +35,7 @@ doc.group('Products').is(doc => {
             body.desc('List of all products')
               .should.not.be.empty()
             body[0].should.have.properties('id', 'name', 'price')
-            body[0].price.desc('Price of this product').should.be.a.Number
+            body[0].price.desc('Price of this product').should.be.a.Number()
           })
       })
     })
@@ -43,9 +43,9 @@ doc.group('Products').is(doc => {
 })
 ```
 
-And then test2doc.js will capture all the info provided by you via `doc.get` / `doc.query` / `doc.resBody` / `something.desc`. You can choose a generator to generate the actual documents based on these collected information.
+And then test2doc.js will capture all the info provided by you via `doc.get` / `doc.query` / `doc.resBody` / `myVar.desc`. You can choose a generator to generate the final documents based on these collected information. Since we capture every thing we need from tests, you will always get up-to-date documents.
 
-*Currently only API Blueprint generator has been implemented.*
+Currently we provide [**API Blueprint**](https://apiblueprint.org/) generator and [**Swagger**](http://swagger.io/) generator.
 
 test2doc.js is not designed to run on a specified test framework, which means you can use this in conjunction with any test frameworks and assertion libraries.
 
@@ -132,12 +132,13 @@ Once you have collected all the info needed to build the documentations, call `e
     - Usually used in chaining call.
     - e.g. `doc.group('a child group').is(doc => { ... })`, first `doc` refers to the parent group, second `doc` refers to the child group
     - return: this group, or a promise if `collectFn` returns a promise, which will be resolved with this group when the promise returned by `collectFn` finishes.
-- `uncapture (object)` - uncapture an object (strip the proxy)
+- `uncapture (object, shouldSliceArray = false)` - uncapture an object (strip the proxy)
+    - If `shouldSliceArray` is true, then any array in `object` will be subsetted according to offset() and limit() set on it.
     - return: an uncaptured object, with all its children and nested children uncaptured
-- `emit (file, generator = apibGenerator, options = {})` - generate the actual documentation file
+- `emit (file, generator = 'apib', options = {})` - generate the actual documentation file
     - `file` can be a filename or a file descriptor. It's the same object passed into `fs.writeFileSync`.
     - If `file` is omitted, the generated text will be the return value.
-    - Currently there is only apibGenerator available with no options. We will support swagger in the future.
+    - Available generators: `apib` / `swagger`
     - return: void
 
 ### Action
@@ -209,14 +210,15 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
     - Only makes sense if this is an array
     - Useful if you only want to include a subset of this array in the documents
     - return: this captured object
-- `uncapture ()` - uncapture this
+- `uncapture (shouldSliceArray = false)` - uncapture this
+    - If `shouldSliceArray` is true, then any array in this object will be subsetted according to offset() and limit() set on it.
     - return: the uncaptured original object for this
 
 # Roadmap
 
 - [x] Add tests and integrate with Travis CI
+- [x] Swagger support
 - [ ] Incremental document generation
-- [ ] Swagger support
 - [ ] Write an extension for supertest to simplify grammer
 - [ ] CONTRIBUTION guide
 - [ ] An official website

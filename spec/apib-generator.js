@@ -12,6 +12,7 @@ describe('API Blueprint generator', function () {
     })
     const output = doc.emit()
     output.includes('user1').should.be.false()
+    output.includes('user2').should.be.true()
     output.includes('user3').should.be.false()
   })
 

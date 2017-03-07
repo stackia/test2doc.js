@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "clone": "^2.1.0",
+    "js-yaml": "^3.8.2",
     "methods": "^1.1.2",
     "path-to-regexp": "^1.7.0",
     "symbol-description": "^1.0.0"
