@@ -23,8 +23,10 @@ paths:
                 title: 口号
               description:
                 type: string
+                title: 网站描述
               domain:
                 type: string
+                title: 网站域名
           examples:
             application/json:
               title: V2EX
@@ -51,7 +53,7 @@ paths:
           examples:
             application/json:
               topic_max: 339105
-              member_max: 218657
+              member_max: 218658
       tags:
         - Site
       summary: 获取网站状态

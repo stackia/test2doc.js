@@ -29,6 +29,8 @@ describe('Site', function () {
         const body = doc.resBody(res.body)
         body.title.desc('站名').should.equal('V2EX')
         body.slogan.desc('口号').should.be.a.String()
+        body.description.desc('网站描述').should.be.a.String()
+        body.domain.desc('网站域名').should.be.a.String()
       })
     })
 
