@@ -119,11 +119,14 @@ Once you have collected all the info needed to build the documentations, call `e
     - return: this group
 - `val (value, ...descriptions)` - capture an value and give it descriptions
     - return: a proxy of `value`
-- `params (parameters, returnProxy = false)` - describe parameters for the base path
+- `params (parameters)` - describe parameters for the base path
     - Same as the second parameter in `basePath(basePath, parameters)`
-    - return: the `parameters` object passed in, or a proxy of `parameters` if `returnProxy` is true
-- `query (queries, returnProxy = false)` - describe queries for the base path
-    - return: the `queries` object passed in, or a proxy of `queries` if `returnProxy` is true
+    - return: this group
+- `query (queries)` - describe queries for the base path
+    - return: this group
+- `reqHeaders (headers)` - describe common request headers for all actions in this group
+    - e.g. `doc.reqHeaders({ 'x-my-header': 'foobar', 'x-my-array-header': ['value1', 'value2'] })`
+    - return: this group
 - `group (title)` - create a child group titled `title`
     - return: the newly created child group
 - `action (title)` - create an action titled `title` belonging to this group
@@ -170,8 +173,17 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
 ```
 - `params (parameters, returnProxy = false)` - Same as `group`.`params`, except this is for action
 - `query (queries, returnProxy = false)` - Same as `group`.`query`, except this is for action
+- `reqHeader (name, value, returnProxy = false)` - describe a single header for this action
+    - e.g. `doc.reqHeader('authorization', 'Bearer 123456')` returns `['authorization', 'Bearer 123456']`
+    - return: an array with two items, `name` and `value`
+- `reqHeaders (headers, returnProxy = false)` - describe request headers for this action
+    - e.g. `doc.reqHeaders({ 'x-my-header': 'foobar', 'x-my-array-header': ['value1', 'value2'] })`
+    - return: the `headers` object passed in, or a proxy of `headers` if `returnProxy` is true
 - `reqBody (body, description, returnProxy = false)` - Capture an object as the request body and give it a description
     - return: the `body` object passed in, or a proxy of `body` if `returnProxy` is true
+- `resHeaders (headers)` - describe response headers for this action
+    - e.g. `doc.resHeaders({ 'content-type': 'application-json', 'x-total-page': '16' })`
+    - return: a proxy of `headers`
 - `resBody (body)` - Capture an object as the response body
     - return: a proxy of `body`
 - `is (collectFn)` - Same as `group`.`is`, except the parameter passed to `collectFn` is this action

@@ -1,7 +1,6 @@
 require('should')
 
 const Group = require('../lib/group')
-const capture = require('../lib/capture')
 
 describe('API Blueprint generator', function () {
   it('should render a subset of an array if offset/limit is marked', function () {
@@ -17,7 +16,6 @@ describe('API Blueprint generator', function () {
   })
 
   it('should render 0, null, undefined, false and empty string correctly', function () {
-    capture.isWrapperType.should.be.a.Function()
     const doc = new Group()
     doc.action('Sample Action').is(doc => {
       doc.get('/user')
@@ -30,5 +28,27 @@ describe('API Blueprint generator', function () {
     output.match(/\+ name \(object/g).length.should.be.equal(2)
     output.includes('+ name: false (boolean').should.be.true()
     output.should.match(/\+ name$/m)
+  })
+
+  it('should correctly render request/response headers', function () {
+    const doc = new Group()
+    doc.reqHeaders({
+      'x-group-common-header': '123'
+    }).action('Sample Action').is(doc => {
+      doc.get('/user')
+      doc.reqHeaders({
+        'x-custom-request-header': 'foobar'
+      })
+      doc.reqHeader('x-another-header', 'test')
+      doc.resHeaders({
+        'set-cookie': ['foo=bar', 'abc=xyz']
+      })
+    })
+    const output = doc.emit()
+    output.includes('x-group-common-header: 123').should.be.true()
+    output.includes('x-custom-request-header: foobar').should.be.true()
+    output.includes('x-another-header: test').should.be.true()
+    output.includes('set-cookie: foo=bar').should.be.true()
+    output.includes('set-cookie: abc=xyz').should.be.true()
   })
 })
