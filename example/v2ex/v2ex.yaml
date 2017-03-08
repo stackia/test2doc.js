@@ -50,7 +50,7 @@ paths:
                 title: 用户数量
           examples:
             application/json:
-              topic_max: 339104
+              topic_max: 339105
               member_max: 218657
       tags:
         - Site

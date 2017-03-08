@@ -20,7 +20,7 @@ after(function () {
 const base = 'https://www.v2ex.com'
 
 describe('Site', function () {
-  doc.group('Site').desc('网站相关接口').is(doc => {
+  doc.group('Site').basePath('/site').desc('网站相关接口').is(doc => {
     it('should provide /api/site/info.json', async function () {
       await doc.action('获取网站信息').is(async doc => {
         const res = await request(base)
@@ -54,7 +54,7 @@ describe('Site', function () {
 })
 
 describe('Node', function () {
-  doc.group('Node').desc('节点相关接口').is(doc => {
+  doc.group('Node').basePath('/nodes').desc('节点相关接口').is(doc => {
     it('should provide /api/nodes/all.json', async function () {
       await doc.action('获取所有节点列表').is(async doc => {
         const res = await request(base)
@@ -91,7 +91,7 @@ describe('Node', function () {
 })
 
 describe('Topic', function () {
-  doc.group('Topic').desc('主题相关接口').is(doc => {
+  doc.group('Topic').basePath('/topics').desc('主题相关接口').is(doc => {
     it('should provide /api/topics/latest.json', async function () {
       await doc.action('获取最新主题列表').is(async doc => {
         const res = await request(base)
@@ -141,7 +141,7 @@ describe('Topic', function () {
 })
 
 describe('Replies', function () {
-  doc.group('Replies').desc('主题回复相关接口').is(doc => {
+  doc.group('Replies').basePath('/replies').desc('主题回复相关接口').is(doc => {
     it('should provide /api/replies/show.json', async function () {
       await doc.action('获取指定主题的所有回复列表').is(async doc => {
         const res = await request(base)
@@ -161,7 +161,7 @@ describe('Replies', function () {
 })
 
 describe('Members', function () {
-  doc.group('Members').desc('用户相关接口').is(doc => {
+  doc.group('Members').basePath('/members').desc('用户相关接口').is(doc => {
     it('should provide /api/members/show.json', async function () {
       await doc.action('获取指定主题的所有回复列表').is(async doc => {
         const res = await request(base)

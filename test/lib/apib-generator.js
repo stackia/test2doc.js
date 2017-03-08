@@ -43,5 +43,9 @@ suite('apib-generator.js', function () {
         generate.msonEscape(value).should.equal(String(value))
       })
     })
+
+    test('should truncate multi-line string to one line', function () {
+      generate.msonEscape('line1\nline2').should.equal('line1 ...')
+    })
   })
 })
