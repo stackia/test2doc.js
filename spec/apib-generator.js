@@ -30,7 +30,7 @@ describe('API Blueprint generator', function () {
     output.should.match(/\+ name$/m)
   })
 
-  it('should correctly render request/response headers', function () {
+  it('should render request/response headers', function () {
     const doc = new Group()
     doc.reqHeaders({
       'x-group-common-header': '123'
@@ -50,5 +50,18 @@ describe('API Blueprint generator', function () {
     output.includes('x-another-header: test').should.be.true()
     output.includes('set-cookie: foo=bar').should.be.true()
     output.includes('set-cookie: abc=xyz').should.be.true()
+  })
+
+  it('should render response status code', function () {
+    const doc = new Group()
+    doc.action('Sample Action').is(doc => {
+      doc.get('/user')
+      doc.status(200)
+      doc.anotherExample()
+      doc.status(404)
+    })
+    const output = doc.emit()
+    output.includes('Response 200').should.be.true()
+    output.includes('Response 404').should.be.true()
   })
 })

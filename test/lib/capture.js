@@ -81,7 +81,7 @@ suite('capture.js', function () {
       capture.isWrapperType(capture({})).should.be.false()
     });
 
-    ['desc', 'required', 'optional', 'nullable', 'fixed', 'fixedType', 'enum', 'default', 'sample', 'status', 'offset', 'limit'].forEach(methodName => {
+    ['desc', 'required', 'optional', 'nullable', 'fixed', 'fixedType', 'enum', 'default', 'sample', 'offset', 'limit'].forEach(methodName => {
       test(`should be able to chain ${methodName}() on returned proxy object`, function () {
         const proxy = capture({})
         proxy[methodName].should.be.a.Function()

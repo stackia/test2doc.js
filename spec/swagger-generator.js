@@ -15,7 +15,7 @@ describe('Swagger specification generator', function () {
     output.includes('user3').should.be.false()
   })
 
-  it('should correctly render request/response headers', function () {
+  it('should render request/response headers', function () {
     const doc = new Group()
     doc.reqHeaders({
       'x-group-common-header': '123'
@@ -36,5 +36,18 @@ describe('Swagger specification generator', function () {
     output.should.match(/type: array\s+items:\s+type: string\s+name: x-array-header/)
     output.includes('x-another-header').should.be.true()
     output.should.match(/set-cookie:\s+type: array/)
+  })
+
+  it('should render response status code', function () {
+    const doc = new Group()
+    doc.action('Sample Action').is(doc => {
+      doc.get('/user')
+      doc.status(200)
+      doc.anotherExample()
+      doc.status(404)
+    })
+    const output = doc.emit(null, 'swagger')
+    output.should.match(/'200':/)
+    output.should.match(/'404':/)
   })
 })

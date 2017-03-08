@@ -31,6 +31,7 @@ doc.group('Products').is(doc => {
           }))
           .expect(200)
           .then(res => {
+            doc.resHeaders(res.headers)
             body = doc.resBody(res.body)
             body.desc('List of all products')
               .should.not.be.empty()
@@ -184,6 +185,8 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
 - `resHeaders (headers)` - describe response headers for this action
     - e.g. `doc.resHeaders({ 'content-type': 'application-json', 'x-total-page': '16' })`
     - return: a proxy of `headers`
+- `status (statusCode)` - describe the response HTTP status code for this action
+    - return: this action
 - `resBody (body)` - Capture an object as the response body
     - return: a proxy of `body`
 - `is (collectFn)` - Same as `group`.`is`, except the parameter passed to `collectFn` is this action
@@ -210,9 +213,6 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
 - `default (defaultValue)` - mark the default value for this
     - return: this captured object
 - `sample (...sampleValues)` - give a sample value for this
-    - return: this captured object
-- `status (statusCode)` - mark the response HTTP status code for this
-    - Only makes sense when called on the root of captured response body
     - return: this captured object
 - `offset (offset)` - specify the offset in the array to be included in the documents
     - Only makes sense if this is an array
