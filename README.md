@@ -186,7 +186,7 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
     - e.g. `doc.resHeaders({ 'content-type': 'application-json', 'x-total-page': '16' })`
     - return: a proxy of `headers`
 - `status (statusCode)` - describe the response HTTP status code for this action
-    - return: this action
+    - return: the `statusCode` passed in
 - `resBody (body)` - Capture an object as the response body
     - return: a proxy of `body`
 - `is (collectFn)` - Same as `group`.`is`, except the parameter passed to `collectFn` is this action
