@@ -50,6 +50,8 @@ Currently we provide [**API Blueprint**](https://apiblueprint.org/) generator an
 
 test2doc.js is not designed to run on a specified test framework, which means you can use this in conjunction with any test frameworks and assertion libraries.
 
+We provide an extension for supertest called [supertest-test2doc](https://github.com/stackia/supertest-test2doc), which makes it much easier to integrate test2doc.js with [supertest](https://github.com/visionmedia/supertest).
+
 ## Installation
 
 Install test2doc.js as an npm module and save it to your package.json file as a development dependency:
@@ -226,15 +228,15 @@ doc.params ...blahblah... doc.query ...blahblah... doc.reqBody ...blahblah... do
     - If `shouldSliceArray` is true, then any array in this object will be subsetted according to offset() and limit() set on it.
     - return: the uncaptured original object for this
 
-# Roadmap
+## Roadmap
 
 - [x] Add tests and integrate with Travis CI
 - [x] Swagger support
+- [x] Write [an extension for supertest](https://github.com/stackia/supertest-test2doc) to simplify grammer
 - [ ] Incremental document generation
-- [ ] Write an extension for supertest to simplify grammer
 - [ ] CONTRIBUTION guide
 - [ ] An official website
 
-# License
+## License
 
 The project is released under [MIT License](https://github.com/stackia/test2doc.js/blob/master/LICENSE).

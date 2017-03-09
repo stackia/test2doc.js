@@ -6,7 +6,7 @@ const doc = require('../../')
 
 doc.title('V2EX 非官方 API 列表')
   .version('1.0.0')
-  .desc('V2EX非官方 API 列表，仅供参考，欢迎补充。',
+  .desc('V2EX 非官方 API 列表，仅供参考，欢迎补充。',
     '接口来源：https://github.com/djyde/V2EX-API')
   .scheme('https', 'http')
   .host('www.v2ex.com')
