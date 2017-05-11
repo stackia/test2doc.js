@@ -10,6 +10,7 @@ suite('apib-generator.js', function () {
 
     test('should work is `queries` parameter is omitted', function () {
       generate.convertPath('/user/:userId').should.equal('/user/{userId}')
+      generate.convertPath('/user/:userId/cards/:cardId').should.equal('/user/{userId}/cards/{cardId}')
     })
   })
 
