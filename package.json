@@ -41,6 +41,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
     "mocha": "^6.2.2",
     "prettier": "^1.19.1",
     "should": "^13.2.3",
@@ -56,16 +57,23 @@
   "engines": {
     "node": ">= 8.0.0"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
     }
   },
   "prettier": {
     "singleQuote": true,
     "semi": false
   },
-  "eslint": {
+  "eslintConfig": {
     "root": true,
     "extends": [
       "standard",
