@@ -7,6 +7,7 @@
     "unit-test": "cross-env TEST2DOC_ENV=test mocha --ui tdd ./test/**/*.js",
     "integration-test": "cross-env TEST2DOC_ENV=test mocha --ui bdd ./spec/**/*.js",
     "lint": "eslint .",
+    "format": "eslint . --fix",
     "test": "npm run lint && npm run unit-test && npm run integration-test",
     "example": "mocha ./example/**/*.js"
   },
@@ -27,14 +28,21 @@
   },
   "homepage": "https://github.com/stackia/test2doc.js#readme",
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/travis-cli": "^8.2.0",
     "cross-env": "^6.0.3",
     "eslint": "^6.7.1",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.1.0",
     "mocha": "^6.2.2",
+    "prettier": "^1.19.1",
     "should": "^13.2.3",
     "supertest": "^4.0.2"
   },
@@ -46,6 +54,27 @@
     "symbol-description": "^1.0.0"
   },
   "engines": {
-    "node": ">= 6.0.0"
+    "node": ">= 8.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  },
+  "eslint": {
+    "root": true,
+    "extends": [
+      "standard",
+      "plugin:prettier/recommended"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
