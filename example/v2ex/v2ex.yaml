@@ -3,11 +3,11 @@ info:
   title: V2EX 非官方 API 列表
   version: 1.0.0
   description: |-
-    V2EX非官方 API 列表，仅供参考，欢迎补充。
+    V2EX 非官方 API 列表，仅供参考，欢迎补充。
 
     接口来源：https://github.com/djyde/V2EX-API
 paths:
-  /site/info.json:
+  /api/site/info.json:
     get:
       responses:
         '200':
@@ -36,7 +36,7 @@ paths:
       tags:
         - Site
       summary: 获取网站信息
-  /site/stats.json:
+  /api/site/stats.json:
     get:
       responses:
         '200':
@@ -52,12 +52,12 @@ paths:
                 title: 用户数量
           examples:
             application/json:
-              topic_max: 339105
-              member_max: 218658
+              topic_max: 623954
+              member_max: 456055
       tags:
         - Site
       summary: 获取网站状态
-  /site/livid.json:
+  /api/site/livid.json:
     get:
       responses:
         '404':
@@ -66,7 +66,7 @@ paths:
         - Site
       summary: 获取 Livid 个人资料
       description: 这是一个不存在的接口，用来测试 404。
-  /nodes/all.json:
+  /api/nodes/all.json:
     get:
       responses:
         '200':
@@ -76,49 +76,69 @@ paths:
             items:
               type: object
               properties:
-                id:
-                  type: number
+                avatar_large:
+                  type: string
                 name:
                   type: string
                   title: 节点名称
-                url:
+                avatar_normal:
                   type: string
                 title:
                   type: string
-                title_alternative:
+                url:
                   type: string
                 topics:
                   type: number
-                header:
-                  type: string
                 footer:
                   type: string
-                created:
+                header:
+                  type: string
+                title_alternative:
+                  type: string
+                avatar_mini:
+                  type: string
+                stars:
                   type: number
+                root:
+                  type: boolean
+                id:
+                  type: number
+                parent_node_name:
+                  type: string
           examples:
             application/json:
-              - id: 1
+              - avatar_large: //cdn.v2ex.com/navatar/c4ca/4238/1_large.png?m=1494924246
                 name: babel
-                url: 'http://www.v2ex.com/go/babel'
+                avatar_normal: //cdn.v2ex.com/navatar/c4ca/4238/1_normal.png?m=1494924246
                 title: Project Babel
-                title_alternative: Project Babel
-                topics: 1119
-                header: Project Babel - 帮助你在云平台上搭建自己的社区
+                url: 'https://www.v2ex.com/go/babel'
+                topics: 1122
                 footer: 'V2EX 基于 Project Babel 驱动。Project Babel 是用 Python 语言写成的，运行于 Google App Engine 云计算平台上的社区软件。Project Babel 当前开发分支 2.5。最新版本可以从 <a href="http://github.com/livid/v2ex" target="_blank">GitHub</a> 获取。'
-                created: 1272206882
-              - id: 2
+                header: Project Babel - 帮助你在云平台上搭建自己的社区
+                title_alternative: Project Babel
+                avatar_mini: //cdn.v2ex.com/navatar/c4ca/4238/1_mini.png?m=1494924246
+                stars: 392
+                root: false
+                id: 1
+                parent_node_name: v2ex
+              - avatar_large: //cdn.v2ex.com/navatar/c81e/728d/2_large.png?m=1497247332
                 name: v2ex
-                url: 'http://www.v2ex.com/go/v2ex'
+                avatar_normal: //cdn.v2ex.com/navatar/c81e/728d/2_normal.png?m=1497247332
                 title: V2EX
-                title_alternative: V2EX
-                topics: 2784
+                url: 'https://www.v2ex.com/go/v2ex'
+                topics: 3330
+                footer: ''
                 header: 这里讨论和发布关于 V2EX 站点的发展。
-                footer: null
-                created: 1272207021
+                title_alternative: V2EX
+                avatar_mini: //cdn.v2ex.com/navatar/c81e/728d/2_mini.png?m=1497247332
+                stars: 1051
+                root: true
+                id: 2
+                parent_node_name: v2ex
       tags:
         - Node
       summary: 获取所有节点列表
-  /nodes/show.json:
+  /api/nodes/show.json:
     get:
       responses:
         '200':
@@ -126,48 +146,51 @@ paths:
           schema:
             type: object
             properties:
-              id:
-                type: number
+              avatar_large:
+                type: string
               name:
-                type: string
-              url:
-                type: string
-              title:
-                type: string
-              title_alternative:
-                type: string
-              topics:
-                type: number
-              stars:
-                type: number
-              header:
-                type: string
-              footer:
-                type: 'null'
-              created:
-                type: number
-              avatar_mini:
                 type: string
               avatar_normal:
                 type: string
-              avatar_large:
+              title:
+                type: string
+              url:
+                type: string
+              topics:
+                type: number
+              footer:
+                type: string
+              header:
+                type: string
+              title_alternative:
+                type: string
+              avatar_mini:
+                type: string
+              stars:
+                type: number
+              root:
+                type: boolean
+              id:
+                type: number
+              parent_node_name:
                 type: string
             title: 节点信息
           examples:
             application/json:
-              id: 2
+              avatar_large: //cdn.v2ex.com/navatar/c81e/728d/2_large.png?m=1497247332
               name: v2ex
-              url: 'http://www.v2ex.com/go/v2ex'
+              avatar_normal: //cdn.v2ex.com/navatar/c81e/728d/2_normal.png?m=1497247332
               title: V2EX
-              title_alternative: V2EX
-              topics: 2784
-              stars: 653
+              url: 'https://www.v2ex.com/go/v2ex'
+              topics: 3331
+              footer: ''
               header: 这里讨论和发布关于 V2EX 站点的发展。
-              footer: null
-              created: 1272207021
-              avatar_mini: //v2ex.assets.uxengine.net/navatar/c81e/728d/2_mini.png?m=1452035333
-              avatar_normal: //v2ex.assets.uxengine.net/navatar/c81e/728d/2_normal.png?m=1452035333
-              avatar_large: //v2ex.assets.uxengine.net/navatar/c81e/728d/2_large.png?m=1452035333
+              title_alternative: V2EX
+              avatar_mini: //cdn.v2ex.com/navatar/c81e/728d/2_mini.png?m=1497247332
+              stars: 1051
+              root: true
+              id: 2
+              parent_node_name: v2ex
       tags:
         - Node
       summary: 获取指定节点信息
@@ -177,7 +200,7 @@ paths:
           description: 节点 ID
           name: id
           in: query
-  /topics/latest.json:
+  /api/topics/latest.json:
     get:
       responses:
         '200':
@@ -187,94 +210,139 @@ paths:
             items:
               type: object
               properties:
-                id:
-                  type: number
-                title:
-                  type: string
-                url:
-                  type: string
-                content:
-                  type: string
-                content_rendered:
-                  type: string
-                replies:
-                  type: number
-                member:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    username:
-                      type: string
-                    tagline:
-                      type: string
-                    avatar_mini:
-                      type: string
-                    avatar_normal:
-                      type: string
-                    avatar_large:
-                      type: string
-                  title: 发帖人信息
                 node:
                   type: object
                   properties:
-                    id:
-                      type: number
+                    avatar_large:
+                      type: string
                     name:
                       type: string
-                    title:
+                    avatar_normal:
                       type: string
-                    title_alternative:
+                    title:
                       type: string
                     url:
                       type: string
                     topics:
                       type: number
+                    footer:
+                      type: string
+                    header:
+                      type: string
+                    title_alternative:
+                      type: string
                     avatar_mini:
                       type: string
+                    stars:
+                      type: number
+                    root:
+                      type: boolean
+                    id:
+                      type: number
+                    parent_node_name:
+                      type: string
+                member:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    website:
+                      type: 'null'
+                    github:
+                      type: 'null'
+                    psn:
+                      type: 'null'
                     avatar_normal:
                       type: string
+                    bio:
+                      type: 'null'
+                    url:
+                      type: string
+                    tagline:
+                      type: 'null'
+                    twitter:
+                      type: 'null'
+                    created:
+                      type: number
                     avatar_large:
                       type: string
+                    avatar_mini:
+                      type: string
+                    location:
+                      type: 'null'
+                    btc:
+                      type: 'null'
+                    id:
+                      type: number
+                  title: 发帖人信息
+                last_reply_by:
+                  type: string
+                last_touched:
+                  type: number
+                title:
+                  type: string
+                url:
+                  type: string
                 created:
                   type: number
+                content:
+                  type: string
+                content_rendered:
+                  type: string
                 last_modified:
                   type: number
-                last_touched:
+                replies:
+                  type: number
+                id:
                   type: number
           examples:
             application/json:
-              - id: 346017
-                title: 第一次发布 app 的开发商名称在哪里设置
-                url: 'http://www.v2ex.com/t/346017'
-                content: 听说第一次上架 app 有机会设置开发商名称，但我都没找到。那个开发商名称是在哪里写的。
-                content_rendered: |
-                  <p>听说第一次上架 app 有机会设置开发商名称，但我都没找到。那个开发商名称是在哪里写的。</p>
-                replies: 0
+              - node:
+                  avatar_large: //cdn.v2ex.com/navatar/093f/65e0/59_large.png?m=1431019484
+                  name: random
+                  avatar_normal: //cdn.v2ex.com/navatar/093f/65e0/59_normal.png?m=1431019484
+                  title: 随想
+                  url: 'https://www.v2ex.com/go/random'
+                  topics: 2363
+                  footer: ''
+                  header: 有的时候，可以停下来找找灵感，然后再继续。
+                  title_alternative: Random
+                  avatar_mini: //cdn.v2ex.com/navatar/093f/65e0/59_mini.png?m=1431019484
+                  stars: 726
+                  root: false
+                  id: 59
+                  parent_node_name: v2ex
                 member:
-                  id: 143545
-                  username: JohnLou
-                  tagline: ''
-                  avatar_mini: //v2ex.assets.uxengine.net/avatar/4d92/d574/143545_mini.png?m=1449123307
-                  avatar_normal: //v2ex.assets.uxengine.net/avatar/4d92/d574/143545_normal.png?m=1449123307
-                  avatar_large: //v2ex.assets.uxengine.net/avatar/4d92/d574/143545_large.png?m=1449123307
-                node:
-                  id: 12
-                  name: qna
-                  title: 问与答
-                  title_alternative: Questions and Answers
-                  url: 'http://www.v2ex.com/go/qna'
-                  topics: 84315
-                  avatar_mini: //v2ex.assets.uxengine.net/navatar/c20a/d4d7/12_mini.png?m=1488428101
-                  avatar_normal: //v2ex.assets.uxengine.net/navatar/c20a/d4d7/12_normal.png?m=1488428101
-                  avatar_large: //v2ex.assets.uxengine.net/navatar/c20a/d4d7/12_large.png?m=1488428101
-                created: 1489002216
-                last_modified: 1489002234
-                last_touched: 1489002036
+                  username: Fdyo
+                  website: null
+                  github: null
+                  psn: null
+                  avatar_normal: //cdn.v2ex.com/avatar/fdea/9749/134864_mini.png?m=1550729719
+                  bio: null
+                  url: 'https://www.v2ex.com/u/Fdyo'
+                  tagline: null
+                  twitter: null
+                  created: 1440422957
+                  avatar_large: //cdn.v2ex.com/avatar/fdea/9749/134864_mini.png?m=1550729719
+                  avatar_mini: //cdn.v2ex.com/avatar/fdea/9749/134864_mini.png?m=1550729719
+                  location: null
+                  btc: null
+                  id: 134864
+                last_reply_by: ''
+                last_touched: 1574921793
+                title: 发现自己不太爱说家乡话了
+                url: 'https://www.v2ex.com/t/623955'
+                created: 1574921793
+                content: RT，会南京话、扬州话，想说也都可以说，但现在即使回到当地，也都说普通话多。有一样的 V2EXer 吗？
+                content_rendered: |
+                  <p>RT，会南京话、扬州话，想说也都可以说，但现在即使回到当地，也都说普通话多。有一样的 V2EXer 吗？</p>
+                last_modified: 1574921793
+                replies: 0
+                id: 623955
       tags:
         - Topic
       summary: 获取最新主题列表
-  /topics/hot.json:
+  /api/topics/hot.json:
     get:
       responses:
         '200':
@@ -284,92 +352,138 @@ paths:
             items:
               type: object
               properties:
-                id:
-                  type: number
-                title:
-                  type: string
-                url:
-                  type: string
-                content:
-                  type: string
-                content_rendered:
-                  type: string
-                replies:
-                  type: number
-                member:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    username:
-                      type: string
-                    tagline:
-                      type: string
-                    avatar_mini:
-                      type: string
-                    avatar_normal:
-                      type: string
-                    avatar_large:
-                      type: string
                 node:
                   type: object
                   properties:
-                    id:
-                      type: number
+                    avatar_large:
+                      type: string
                     name:
                       type: string
+                    avatar_normal:
+                      type: string
                     title:
+                      type: string
+                    url:
+                      type: string
+                    topics:
+                      type: number
+                    footer:
+                      type: string
+                    header:
                       type: string
                     title_alternative:
                       type: string
-                    url:
-                      type: string
-                    topics:
-                      type: number
                     avatar_mini:
                       type: string
+                    stars:
+                      type: number
+                    root:
+                      type: boolean
+                    id:
+                      type: number
+                    parent_node_name:
+                      type: string
+                member:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    website:
+                      type: 'null'
+                    github:
+                      type: 'null'
+                    psn:
+                      type: 'null'
                     avatar_normal:
                       type: string
+                    bio:
+                      type: 'null'
+                    url:
+                      type: string
+                    tagline:
+                      type: 'null'
+                    twitter:
+                      type: 'null'
+                    created:
+                      type: number
                     avatar_large:
                       type: string
+                    avatar_mini:
+                      type: string
+                    location:
+                      type: 'null'
+                    btc:
+                      type: 'null'
+                    id:
+                      type: number
+                last_reply_by:
+                  type: string
+                last_touched:
+                  type: number
+                title:
+                  type: string
+                url:
+                  type: string
                 created:
                   type: number
+                content:
+                  type: string
+                content_rendered:
+                  type: string
                 last_modified:
                   type: number
-                last_touched:
+                replies:
+                  type: number
+                id:
                   type: number
           examples:
             application/json:
-              - id: 345806
-                title: 那个上课睡觉的女孩
-                url: 'http://www.v2ex.com/t/345806'
-                content: ".\r\n　　同桌的女孩总在上课睡觉，我觉得她的脖颈很美。\r\n\r\n　　老师叫她站起来回答问题，她仓皇起立低着头一脸茫然。我赶紧把画好线的书悄悄塞到她跟前，她开始念答案。逃过一劫之后，也没感激我，接着睡。她的书桌里有各种零食，萨其马，饼干，酸奶，小核桃，话梅，牛肉干，有时候还有鸡腿。后来知道，她是一个舞团的队长。那个全是小美女的舞团，接各种演出，超市促销，公司庆典，生日派对，活动表演，什么都接，她们赚了不少钱。\r\n\r\n　　她长得漂亮，长发扎马尾，经常穿着运动套装，一副英姿飒爽的样子，平时古灵精怪，也没跟我说过几句话。有一次班里春游，在保俶山下，我们过马路，一辆车在我们面前停下来，她回过头冲我笑了一下盯着我的眼睛说，你一直朝车里看什么。我确实一直朝车里看，车里的女人很时尚很好看。我被她说中，难受了很久，一直到我又在课堂上帮睡梦中的她打了一次掩护，我才松了一口气，在极聪明的人面前我是很害怕的。\r\n\r\n　　后来，我认识了一帮也是跳舞的女孩，她们和我的同桌不一样，她们总是浓妆艳抹，穿着很暴露的性感衣服，看上去很美，却远没有我的同桌青春靓丽。她们参加各种商演，出席各种场合，后来集体参加一个选秀节目，没过多久就销声匿迹了。\r\n\r\n　　学校举行秋季运动会，我被迫参加了长跑比赛。最后两圈实在坚持不下来了，同桌突然出现在我的身旁，她跟着我跑，手里捏着一瓶结着冰的矿泉水，往我头上背上猛灌。我打个激灵，却突然有了力量，虽然没有名次却坚持跑到了终点。跑完后，我躺在操场的草坪上剧烈的喘息不止，她挡住了我眼前的光线站在我跟前，看着躺在地上四平八稳却生不如死的我乐得花枝乱颤。\r\n\r\n　　在美术素描课画室里，同桌认真的画了一幅画，有眼尖的同学认了出来，说她画得是我。听到风声，我赶紧跑过去看，吓得同桌一把扯下画纸三两把卷起来背手藏在身后，眼睛直直的盯着我的眼睛。我被她震住了，摊摊手走开。回到教室，她不跟我说话。快到中午吃饭的时候，她突然让我请她吃饭然后递给我一张纸条，我打开纸条那是一句话：你不该亲自破坏一个女孩的秘密。\r\n\r\n　　毕业季里，大家都忙着分手，聚餐，各种离别活动。同桌提议，我们应该有一张合影，我欣然同意。我第一次见她穿裙子，她披着长发，还戴了耳环。在一颗桂花树下，我们拍了张照，她左手挽着我的右臂，我依然表情僵硬，她笑面如花。\r\n\r\n　　临行前，她跟我相约在柳浪闻莺走走，第一次跟她单独相处，我有点难为情。俩个人像傻瓜一样面对着西湖，坐在长椅上大半天，有时候也不说话，就那样愣愣的坐着。太阳落山了，她说，以后见面也不知道何年何月了，老同桌，我们拥抱一下吧！我说好。\r\n\r\n　　很多年之后我在杭州延安路上碰到了同桌，她兴奋的拉住我问东问西，还介绍身边的男人给我认识，说是他的男朋友。我看着她回忆起种种往事，其实这之前我还看见过她一次，她在一个大型商场门口演出，跳得青春洋溢，魅力四射，我刚好路过挤在人群中凑热闹。现在看见她男朋友，心里竟有些微的醋意。"
-                content_rendered: ".\r<br />　　同桌的女孩总在上课睡觉，我觉得她的脖颈很美。\r<br />\r<br />　　老师叫她站起来回答问题，她仓皇起立低着头一脸茫然。我赶紧把画好线的书悄悄塞到她跟前，她开始念答案。逃过一劫之后，也没感激我，接着睡。她的书桌里有各种零食，萨其马，饼干，酸奶，小核桃，话梅，牛肉干，有时候还有鸡腿。后来知道，她是一个舞团的队长。那个全是小美女的舞团，接各种演出，超市促销，公司庆典，生日派对，活动表演，什么都接，她们赚了不少钱。\r<br />\r<br />　　她长得漂亮，长发扎马尾，经常穿着运动套装，一副英姿飒爽的样子，平时古灵精怪，也没跟我说过几句话。有一次班里春游，在保俶山下，我们过马路，一辆车在我们面前停下来，她回过头冲我笑了一下盯着我的眼睛说，你一直朝车里看什么。我确实一直朝车里看，车里的女人很时尚很好看。我被她说中，难受了很久，一直到我又在课堂上帮睡梦中的她打了一次掩护，我才松了一口气，在极聪明的人面前我是很害怕的。\r<br />\r<br />　　后来，我认识了一帮也是跳舞的女孩，她们和我的同桌不一样，她们总是浓妆艳抹，穿着很暴露的性感衣服，看上去很美，却远没有我的同桌青春靓丽。她们参加各种商演，出席各种场合，后来集体参加一个选秀节目，没过多久就销声匿迹了。\r<br />\r<br />　　学校举行秋季运动会，我被迫参加了长跑比赛。最后两圈实在坚持不下来了，同桌突然出现在我的身旁，她跟着我跑，手里捏着一瓶结着冰的矿泉水，往我头上背上猛灌。我打个激灵，却突然有了力量，虽然没有名次却坚持跑到了终点。跑完后，我躺在操场的草坪上剧烈的喘息不止，她挡住了我眼前的光线站在我跟前，看着躺在地上四平八稳却生不如死的我乐得花枝乱颤。\r<br />\r<br />　　在美术素描课画室里，同桌认真的画了一幅画，有眼尖的同学认了出来，说她画得是我。听到风声，我赶紧跑过去看，吓得同桌一把扯下画纸三两把卷起来背手藏在身后，眼睛直直的盯着我的眼睛。我被她震住了，摊摊手走开。回到教室，她不跟我说话。快到中午吃饭的时候，她突然让我请她吃饭然后递给我一张纸条，我打开纸条那是一句话：你不该亲自破坏一个女孩的秘密。\r<br />\r<br />　　毕业季里，大家都忙着分手，聚餐，各种离别活动。同桌提议，我们应该有一张合影，我欣然同意。我第一次见她穿裙子，她披着长发，还戴了耳环。在一颗桂花树下，我们拍了张照，她左手挽着我的右臂，我依然表情僵硬，她笑面如花。\r<br />\r<br />　　临行前，她跟我相约在柳浪闻莺走走，第一次跟她单独相处，我有点难为情。俩个人像傻瓜一样面对着西湖，坐在长椅上大半天，有时候也不说话，就那样愣愣的坐着。太阳落山了，她说，以后见面也不知道何年何月了，老同桌，我们拥抱一下吧！我说好。\r<br />\r<br />　　很多年之后我在杭州延安路上碰到了同桌，她兴奋的拉住我问东问西，还介绍身边的男人给我认识，说是他的男朋友。我看着她回忆起种种往事，其实这之前我还看见过她一次，她在一个大型商场门口演出，跳得青春洋溢，魅力四射，我刚好路过挤在人群中凑热闹。现在看见她男朋友，心里竟有些微的醋意。"
-                replies: 111
+              - node:
+                  avatar_large: //cdn.v2ex.com/navatar/c20a/d4d7/12_large.png?m=1574910433
+                  name: qna
+                  avatar_normal: //cdn.v2ex.com/navatar/c20a/d4d7/12_normal.png?m=1574910433
+                  title: 问与答
+                  url: 'https://www.v2ex.com/go/qna'
+                  topics: 143908
+                  footer: ''
+                  header: 一个更好的世界需要你持续地提出好问题。
+                  title_alternative: Questions and Answers
+                  avatar_mini: //cdn.v2ex.com/navatar/c20a/d4d7/12_mini.png?m=1574910433
+                  stars: 2722
+                  root: false
+                  id: 12
+                  parent_node_name: v2ex
                 member:
-                  id: 207315
-                  username: Libby520
-                  tagline: ''
-                  avatar_mini: //v2ex.assets.uxengine.net/avatar/0f77/eb90/207315_mini.png?m=1482898014
-                  avatar_normal: //v2ex.assets.uxengine.net/avatar/0f77/eb90/207315_normal.png?m=1482898014
-                  avatar_large: //v2ex.assets.uxengine.net/avatar/0f77/eb90/207315_large.png?m=1482898014
-                node:
-                  id: 26
-                  name: hangzhou
-                  title: 杭州
-                  title_alternative: Hangzhou
-                  url: 'http://www.v2ex.com/go/hangzhou'
-                  topics: 473
-                  avatar_mini: /static/img/node_mini.png
-                  avatar_normal: /static/img/node_normal.png
-                  avatar_large: /static/img/node_large.png
-                created: 1488942621
-                last_modified: 1488951001
-                last_touched: 1488988387
+                  username: swordart0000
+                  website: null
+                  github: null
+                  psn: null
+                  avatar_normal: //cdn.v2ex.com/gravatar/3aad8d66ec40a90cdcb705da7dd34d41?s=24&d=retro
+                  bio: null
+                  url: 'https://www.v2ex.com/u/swordart0000'
+                  tagline: null
+                  twitter: null
+                  created: 1500019340
+                  avatar_large: //cdn.v2ex.com/gravatar/3aad8d66ec40a90cdcb705da7dd34d41?s=24&d=retro
+                  avatar_mini: //cdn.v2ex.com/gravatar/3aad8d66ec40a90cdcb705da7dd34d41?s=24&d=retro
+                  location: null
+                  btc: null
+                  id: 240301
+                last_reply_by: Yovey
+                last_touched: 1574921335
+                title: 22 岁大学马上毕业，父母突然告诉我他们要有二胎了要怎么应对
+                url: 'https://www.v2ex.com/t/623687'
+                created: 1574845602
+                content: RT，LZ 现在 22 岁马上就毕业了（提前毕业）。父母今天突然告诉我他们要有二胎，之前完全没有和我讨论过完全是先斩后奏。我不是说我要干涉我父母的生育自由。但是我实在是无法接受，差了 22 岁的年龄差说是我孩子别人都信。将来小孩 20 岁的时候我父母差不多快 70 那是不是还要我带。突然得知这个消息 LZ 比较震惊，不知道应该怎么和父母说了。目前思绪很乱，望大家理解。
+                content_rendered: |
+                  <p>RT，LZ 现在 22 岁马上就毕业了（提前毕业）。父母今天突然告诉我他们要有二胎，之前完全没有和我讨论过完全是先斩后奏。我不是说我要干涉我父母的生育自由。但是我实在是无法接受，差了 22 岁的年龄差说是我孩子别人都信。将来小孩 20 岁的时候我父母差不多快 70 那是不是还要我带。突然得知这个消息 LZ 比较震惊，不知道应该怎么和父母说了。目前思绪很乱，望大家理解。</p>
+                last_modified: 1574845602
+                replies: 231
+                id: 623687
       tags:
         - Topic
       summary: 获取热门主题列表
-  /topics/show.json:
+  /api/topics/show.json:
     get:
       responses:
         '200':
@@ -379,39 +493,14 @@ paths:
             items:
               type: object
               properties:
-                id:
-                  type: number
-                title:
-                  type: string
-                url:
-                  type: string
-                content:
-                  type: string
-                content_rendered:
-                  type: string
-                replies:
-                  type: number
-                member:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    username:
-                      type: string
-                    tagline:
-                      type: string
-                    avatar_mini:
-                      type: string
-                    avatar_normal:
-                      type: string
-                    avatar_large:
-                      type: string
                 node:
                   type: object
                   properties:
-                    id:
-                      type: number
+                    avatar_large:
+                      type: string
                     name:
+                      type: string
+                    avatar_normal:
                       type: string
                     title:
                       type: string
@@ -419,46 +508,119 @@ paths:
                       type: string
                     topics:
                       type: number
+                    footer:
+                      type: string
+                    header:
+                      type: string
+                    title_alternative:
+                      type: string
                     avatar_mini:
+                      type: string
+                    stars:
+                      type: number
+                    root:
+                      type: boolean
+                    id:
+                      type: number
+                    parent_node_name:
+                      type: string
+                member:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    website:
+                      type: string
+                    github:
+                      type: string
+                    psn:
                       type: string
                     avatar_normal:
                       type: string
+                    bio:
+                      type: string
+                    url:
+                      type: string
+                    tagline:
+                      type: string
+                    twitter:
+                      type: string
+                    created:
+                      type: number
                     avatar_large:
                       type: string
+                    avatar_mini:
+                      type: string
+                    location:
+                      type: string
+                    btc:
+                      type: string
+                    id:
+                      type: number
+                last_reply_by:
+                  type: string
+                last_touched:
+                  type: number
+                title:
+                  type: string
+                url:
+                  type: string
                 created:
                   type: number
                   title: 主题创建时间戳
+                content:
+                  type: string
+                content_rendered:
+                  type: string
                 last_modified:
                   type: number
-                last_touched:
+                replies:
+                  type: number
+                id:
                   type: number
           examples:
             application/json:
-              - id: 1000
+              - node:
+                  avatar_large: //cdn.v2ex.com/navatar/c4ca/4238/1_large.png?m=1494924246
+                  name: babel
+                  avatar_normal: //cdn.v2ex.com/navatar/c4ca/4238/1_normal.png?m=1494924246
+                  title: Project Babel
+                  url: 'https://www.v2ex.com/go/babel'
+                  topics: 1122
+                  footer: 'V2EX 基于 Project Babel 驱动。Project Babel 是用 Python 语言写成的，运行于 Google App Engine 云计算平台上的社区软件。Project Babel 当前开发分支 2.5。最新版本可以从 <a href="http://github.com/livid/v2ex" target="_blank">GitHub</a> 获取。'
+                  header: Project Babel - 帮助你在云平台上搭建自己的社区
+                  title_alternative: Project Babel
+                  avatar_mini: //cdn.v2ex.com/navatar/c4ca/4238/1_mini.png?m=1494924246
+                  stars: 392
+                  root: false
+                  id: 1
+                  parent_node_name: v2ex
+                member:
+                  username: Livid
+                  website: 'https://livid.v2ex.com/'
+                  github: ''
+                  psn: ''
+                  avatar_normal: //cdn.v2ex.com/avatar/c4ca/4238/1_mini.png?m=1553581155
+                  bio: Remember the bigger green
+                  url: 'https://www.v2ex.com/u/Livid'
+                  tagline: Gravitated and spellbound
+                  twitter: ''
+                  created: 1272203146
+                  avatar_large: //cdn.v2ex.com/avatar/c4ca/4238/1_mini.png?m=1553581155
+                  avatar_mini: //cdn.v2ex.com/avatar/c4ca/4238/1_mini.png?m=1553581155
+                  location: ''
+                  btc: ''
+                  id: 1
+                last_reply_by: dimlau
+                last_touched: 1280285385
                 title: Google App Engine x MobileMe
-                url: 'http://www.v2ex.com/t/1000'
+                url: 'https://www.v2ex.com/t/1000'
+                created: 1280192329
                 content: "从现在开始，新上传到 V2EX 的头像将存储在 MobileMe iDisk 中。这是 V2EX 到目前为之所用到的第三个云。\r\n\r\n得益于这个架构升级，现在头像上传之后，将立刻在全站的所有页面更新。"
                 content_rendered: "从现在开始，新上传到 V2EX 的头像将存储在 MobileMe iDisk 中。这是 V2EX 到目前为之所用到的第三个云。\r\n<br />\r\n<br />得益于这个架构升级，现在头像上传之后，将立刻在全站的所有页面更新。"
-                replies: 14
-                member:
-                  id: 1
-                  username: Livid
-                  tagline: Gravitated and spellbound
-                  avatar_mini: //v2ex.assets.uxengine.net/avatar/c4ca/4238/1_mini.png?m=1466415272
-                  avatar_normal: //v2ex.assets.uxengine.net/avatar/c4ca/4238/1_normal.png?m=1466415272
-                  avatar_large: //v2ex.assets.uxengine.net/avatar/c4ca/4238/1_large.png?m=1466415272
-                node:
-                  id: 1
-                  name: babel
-                  title: Project Babel
-                  url: 'http://www.v2ex.com/go/babel'
-                  topics: 1119
-                  avatar_mini: //v2ex.assets.uxengine.net/navatar/c4ca/4238/1_mini.png?m=1419840368
-                  avatar_normal: //v2ex.assets.uxengine.net/navatar/c4ca/4238/1_normal.png?m=1419840368
-                  avatar_large: //v2ex.assets.uxengine.net/navatar/c4ca/4238/1_large.png?m=1419840368
-                created: 1280192329
                 last_modified: 1335004238
-                last_touched: 1280285385
+                replies: 14
+                id: 1000
       tags:
         - Topic
       summary: 获取指定主题信息
@@ -467,7 +629,7 @@ paths:
         - type: number
           name: id
           in: query
-  /replies/show.json:
+  /api/replies/show.json:
     get:
       responses:
         '200':
@@ -477,49 +639,79 @@ paths:
             items:
               type: object
               properties:
-                id:
+                member:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    website:
+                      type: string
+                    github:
+                      type: string
+                    psn:
+                      type: string
+                    avatar_normal:
+                      type: string
+                    bio:
+                      type: string
+                    url:
+                      type: string
+                    tagline:
+                      type: string
+                    twitter:
+                      type: string
+                    created:
+                      type: number
+                    avatar_large:
+                      type: string
+                    avatar_mini:
+                      type: string
+                    location:
+                      type: string
+                    btc:
+                      type: string
+                    id:
+                      type: number
+                created:
                   type: number
-                thanks:
+                topic_id:
                   type: number
-                  title: 获得感谢数
                 content:
                   type: string
                 content_rendered:
                   type: string
-                member:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    username:
-                      type: string
-                    tagline:
-                      type: string
-                    avatar_mini:
-                      type: string
-                    avatar_normal:
-                      type: string
-                    avatar_large:
-                      type: string
-                created:
-                  type: number
                 last_modified:
+                  type: number
+                  title: 最后编辑时间戳
+                member_id:
+                  type: number
+                id:
                   type: number
           examples:
             application/json:
-              - id: 1
-                thanks: 5
-                content: "很高兴看到 v2ex 又回来了，等了你半天发第一贴了，憋死我了。\r\n\r\nnice work~"
-                content_rendered: "很高兴看到 v2ex 又回来了，等了你半天发第一贴了，憋死我了。\r<br />\r<br />nice work~"
-                member:
-                  id: 4
+              - member:
                   username: Jay
+                  website: 'http://theboldapp.com'
+                  github: yuanhao
+                  psn: ''
+                  avatar_normal: //cdn.v2ex.com/avatar/a87f/f679/4_mini.png?m=1424948183
+                  bio: ''
+                  url: 'https://www.v2ex.com/u/Jay'
                   tagline: Engineer. Make things.
-                  avatar_mini: //v2ex.assets.uxengine.net/avatar/a87f/f679/4_mini.png?m=1424948183
-                  avatar_normal: //v2ex.assets.uxengine.net/avatar/a87f/f679/4_normal.png?m=1424948183
-                  avatar_large: //v2ex.assets.uxengine.net/avatar/a87f/f679/4_large.png?m=1424948183
+                  twitter: yuanhao
+                  created: 1272207173
+                  avatar_large: //cdn.v2ex.com/avatar/a87f/f679/4_mini.png?m=1424948183
+                  avatar_mini: //cdn.v2ex.com/avatar/a87f/f679/4_mini.png?m=1424948183
+                  location: Stuttgart
+                  btc: ''
+                  id: 4
                 created: 1272207477
+                topic_id: 1
+                content: "很高兴看到 v2ex 又回来了，等了你半天发第一贴了，憋死我了。\r\n\r\nnice work~"
+                content_rendered: 很高兴看到 v2ex 又回来了，等了你半天发第一贴了，憋死我了。<br /><br />nice work~
                 last_modified: 1335092176
+                member_id: 4
+                id: 1
       tags:
         - Replies
       summary: 获取指定主题的所有回复列表
@@ -536,7 +728,7 @@ paths:
           description: 每页条数
           name: page_size
           in: query
-  /members/show.json:
+  /api/members/show.json:
     get:
       responses:
         '200':
@@ -544,57 +736,57 @@ paths:
           schema:
             type: object
             properties:
-              status:
-                type: string
-              id:
-                type: number
-              url:
-                type: string
               username:
                 type: string
               website:
                 type: string
-              twitter:
-                type: string
-              psn:
-                type: string
               github:
                 type: string
-              btc:
-                type: string
-              location:
-                type: string
-              tagline:
-                type: string
-              bio:
-                type: string
-              avatar_mini:
+              psn:
                 type: string
               avatar_normal:
                 type: string
                 title: 头像 URL
-              avatar_large:
+              bio:
+                type: string
+              url:
+                type: string
+              tagline:
+                type: string
+              twitter:
                 type: string
               created:
                 type: number
+              status:
+                type: string
+              avatar_large:
+                type: string
+              avatar_mini:
+                type: string
+              location:
+                type: string
+              btc:
+                type: string
+              id:
+                type: number
           examples:
             application/json:
-              status: found
-              id: 1
-              url: 'http://www.v2ex.com/member/Livid'
               username: Livid
-              website: ''
-              twitter: ''
-              psn: ''
+              website: 'https://livid.v2ex.com/'
               github: ''
-              btc: ''
-              location: '91789'
+              psn: ''
+              avatar_normal: //cdn.v2ex.com/avatar/c4ca/4238/1_mini.png?m=1553581155
+              bio: Remember the bigger green
+              url: 'https://www.v2ex.com/u/Livid'
               tagline: Gravitated and spellbound
-              bio: 'I’ve managed to make something I could call my own world, over time, little by little. And when I’m inside it, I feel kind of relieved.'
-              avatar_mini: //v2ex.assets.uxengine.net/avatar/c4ca/4238/1_mini.png?m=1466415272
-              avatar_normal: //v2ex.assets.uxengine.net/avatar/c4ca/4238/1_normal.png?m=1466415272
-              avatar_large: //v2ex.assets.uxengine.net/avatar/c4ca/4238/1_large.png?m=1466415272
+              twitter: ''
               created: 1272203146
+              status: found
+              avatar_large: //cdn.v2ex.com/avatar/c4ca/4238/1_mini.png?m=1553581155
+              avatar_mini: //cdn.v2ex.com/avatar/c4ca/4238/1_mini.png?m=1553581155
+              location: ''
+              btc: ''
+              id: 1
       tags:
         - Members
       summary: 获取指定主题的所有回复列表

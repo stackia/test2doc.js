@@ -27,22 +27,22 @@
   },
   "homepage": "https://github.com/stackia/test2doc.js#readme",
   "devDependencies": {
-    "cross-env": "^4.0.0",
-    "eslint": "^3.17.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "mocha": "^3.2.0",
-    "should": "^11.2.0",
-    "supertest": "^3.0.0"
+    "cross-env": "^6.0.3",
+    "eslint": "^6.7.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "mocha": "^6.2.2",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "clone": "^2.1.0",
     "js-yaml": "^3.8.2",
     "methods": "^1.1.2",
-    "path-to-regexp": "^1.7.0",
+    "path-to-regexp": "^6.1.0",
     "symbol-description": "^1.0.0"
   },
   "engines": {

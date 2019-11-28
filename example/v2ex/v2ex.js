@@ -156,7 +156,7 @@ describe('Replies', function () {
           .expect(200)
         const body = doc.resBody(res.body)
         body.limit(1).should.be.an.Array()
-        body[0].thanks.desc('获得感谢数').should.be.a.Number()
+        body[0].last_modified.desc('最后编辑时间戳').should.be.a.Number()
       })
     })
   })

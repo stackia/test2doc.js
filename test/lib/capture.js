@@ -95,37 +95,37 @@ suite('capture.js', function () {
   })
 
   suite('#typeOf()', function () {
-    test(`should return "array" for an array and its proxy`, function () {
+    test('should return "array" for an array and its proxy', function () {
       capture.typeOf([]).should.equal('array')
       capture.typeOf(capture([])).should.equal('array')
     })
 
-    test(`should return "number" for a number and its proxy`, function () {
+    test('should return "number" for a number and its proxy', function () {
       capture.typeOf(1.23).should.equal('number')
       capture.typeOf(capture(1.23)).should.equal('number')
     })
 
-    test(`should return "boolean" for a boolean and its proxy`, function () {
+    test('should return "boolean" for a boolean and its proxy', function () {
       capture.typeOf(true).should.equal('boolean')
       capture.typeOf(capture(true)).should.equal('boolean')
     })
 
-    test(`should return "string" for a string and its proxy`, function () {
+    test('should return "string" for a string and its proxy', function () {
       capture.typeOf('foobar').should.equal('string')
       capture.typeOf(capture('foobar')).should.equal('string')
     })
 
-    test(`should return "object" for an object and its proxy`, function () {
+    test('should return "object" for an object and its proxy', function () {
       capture.typeOf({}).should.equal('object')
       capture.typeOf(capture({})).should.equal('object')
     })
 
-    test(`should return "object" for null and its proxy`, function () {
+    test('should return "object" for null and its proxy', function () {
       capture.typeOf(null).should.equal('object')
       capture.typeOf(capture(null)).should.equal('object')
     })
 
-    test(`should return "object" for undefined and its proxy`, function () {
+    test('should return "object" for undefined and its proxy', function () {
       capture.typeOf(undefined).should.equal('object')
       capture.typeOf(capture(undefined)).should.equal('object')
     })
