@@ -4,5 +4,6 @@ node_js:
   - '8'
 install:
   - yarn global add @commitlint/travis-cli codecov
+  - yarn
 script:
   - 'commitlint-travis && yarn test --coverage && codecov'
