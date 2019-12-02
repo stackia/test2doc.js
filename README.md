@@ -1,6 +1,6 @@
 # test2doc.js - Build API docs from your tests
 
-[![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![Travis CI](https://travis-ci.org/stackia/test2doc.js.svg?branch=master)](https://travis-ci.org/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/status.svg)](https://david-dm.org/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/dev-status.svg)](https://david-dm.org/stackia/test2doc.js?type=dev) [![Gitter](https://img.shields.io/gitter/room/test2doc-js/Lobby.svg)](https://gitter.im/test2doc-js/Lobby)
+[![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![Travis CI](https://travis-ci.org/stackia/test2doc.js.svg?branch=master)](https://travis-ci.org/stackia/test2doc.js) [![codecov](https://codecov.io/gh/stackia/test2doc.js/branch/master/graph/badge.svg)](https://codecov.io/gh/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/status.svg)](https://david-dm.org/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/dev-status.svg)](https://david-dm.org/stackia/test2doc.js?type=dev) [![Gitter](https://img.shields.io/gitter/room/test2doc-js/Lobby.svg)](https://gitter.im/test2doc-js/Lobby)
 
 test2doc.js helps you seamlessly integrate API documentation generation to your test flow.
 
