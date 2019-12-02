@@ -7,3 +7,4 @@ install:
   - yarn
 script:
   - 'commitlint-travis && yarn test --coverage && codecov'
+cache: yarn
