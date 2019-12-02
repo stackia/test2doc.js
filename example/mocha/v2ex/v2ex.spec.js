@@ -2,7 +2,7 @@ const path = require('path')
 const request = require('supertest')
 require('should')
 
-const doc = require('../../')
+const doc = require('../../../')
 
 doc
   .title('V2EX 非官方 API 列表')

@@ -2,5 +2,7 @@ language: node_js
 node_js:
   - 'node'
   - '8'
+install:
+  - yarn global add @commitlint/travis-cli codecov
 script:
-  - 'commitlint-travis && yarn test'
+  - 'commitlint-travis && yarn test --coverage && codecov'
