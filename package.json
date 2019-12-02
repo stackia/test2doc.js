@@ -2,10 +2,10 @@
   "name": "test2doc",
   "version": "0.3.6",
   "description": "Build API docs from your tests",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "unit-test": "cross-env TEST2DOC_ENV=test mocha --ui tdd ./test/**/*.js",
-    "integration-test": "cross-env TEST2DOC_ENV=test mocha --ui bdd ./spec/**/*.js",
+    "unit-test": "cross-env TEST2DOC_ENV=test jest ./lib",
+    "integration-test": "cross-env TEST2DOC_ENV=test jest ./spec",
     "lint": "eslint .",
     "format": "eslint . --fix",
     "test": "npm run lint && npm run unit-test && npm run integration-test",
@@ -79,7 +79,10 @@
     "extends": [
       "standard",
       "plugin:prettier/recommended"
-    ]
+    ],
+    "env": {
+      "jest": true
+    }
   },
   "commitlint": {
     "extends": [

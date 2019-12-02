@@ -1,9 +1,7 @@
-require('should')
-
 const Group = require('../lib/group')
 
-describe('Swagger specification generator', function() {
-  it('should render a subset of an array if offset/limit is marked', function() {
+describe('Swagger specification generator', () => {
+  test('should render a subset of an array if offset/limit is marked', () => {
     const doc = new Group()
     doc.action('Sample Action').is(doc => {
       doc.get('/user')
@@ -13,12 +11,12 @@ describe('Swagger specification generator', function() {
         .limit(1)
     })
     const output = doc.emit(null, 'swagger')
-    output.includes('user1').should.be.false()
-    output.includes('user2').should.be.true()
-    output.includes('user3').should.be.false()
+    expect(output.includes('user1')).toBe(false)
+    expect(output.includes('user2')).toBe(true)
+    expect(output.includes('user3')).toBe(false)
   })
 
-  it('should render request/response headers', function() {
+  test('should render request/response headers', () => {
     const doc = new Group()
     doc
       .reqHeaders({
@@ -37,16 +35,16 @@ describe('Swagger specification generator', function() {
         })
       })
     const output = doc.emit(null, 'swagger')
-    output.includes('x-group-common-header').should.be.true()
-    output.includes('x-custom-request-header').should.be.true()
-    output.should.match(
+    expect(output.includes('x-group-common-header')).toBe(true)
+    expect(output.includes('x-custom-request-header')).toBe(true)
+    expect(output).toMatch(
       /type: array\s+items:\s+type: string\s+name: x-array-header/
     )
-    output.includes('x-another-header').should.be.true()
-    output.should.match(/set-cookie:\s+type: array/)
+    expect(output.includes('x-another-header')).toBe(true)
+    expect(output).toMatch(/set-cookie:\s+type: array/)
   })
 
-  it('should render response status code', function() {
+  test('should render response status code', () => {
     const doc = new Group()
     doc.action('Sample Action').is(doc => {
       doc.get('/user')
@@ -55,7 +53,7 @@ describe('Swagger specification generator', function() {
       doc.status(404)
     })
     const output = doc.emit(null, 'swagger')
-    output.should.match(/'200':/)
-    output.should.match(/'404':/)
+    expect(output).toMatch(/'200':/)
+    expect(output).toMatch(/'404':/)
   })
 })
