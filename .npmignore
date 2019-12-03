@@ -5,3 +5,5 @@ spec
 .eslintrc
 .vscode
 .editorconfig
+jsconfig.json
+coverage
