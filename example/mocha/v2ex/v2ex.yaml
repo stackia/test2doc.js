@@ -7,7 +7,7 @@ info:
 
     接口来源：https://github.com/djyde/V2EX-API
 paths:
-  /api/site/info.json:
+  /site/info.json:
     get:
       responses:
         '200':
@@ -36,7 +36,7 @@ paths:
       tags:
         - Site
       summary: 获取网站信息
-  /api/site/stats.json:
+  /site/stats.json:
     get:
       responses:
         '200':
@@ -52,12 +52,12 @@ paths:
                 title: 用户数量
           examples:
             application/json:
-              topic_max: 625298
-              member_max: 456970
+              topic_max: 625508
+              member_max: 457101
       tags:
         - Site
       summary: 获取网站状态
-  /api/site/livid.json:
+  /site/livid.json:
     get:
       responses:
         '404':
@@ -66,7 +66,7 @@ paths:
         - Site
       summary: 获取 Livid 个人资料
       description: 这是一个不存在的接口，用来测试 404。
-  /api/nodes/all.json:
+  /nodes/all.json:
     get:
       responses:
         '200':
@@ -126,7 +126,7 @@ paths:
                 avatar_normal: //cdn.v2ex.com/navatar/c81e/728d/2_normal.png?m=1497247332
                 title: V2EX
                 url: 'https://www.v2ex.com/go/v2ex'
-                topics: 3331
+                topics: 3330
                 footer: ''
                 header: 这里讨论和发布关于 V2EX 站点的发展。
                 title_alternative: V2EX
@@ -138,7 +138,7 @@ paths:
       tags:
         - Node
       summary: 获取所有节点列表
-  /api/nodes/show.json:
+  /nodes/show.json:
     get:
       responses:
         '200':
@@ -200,7 +200,7 @@ paths:
           description: 节点 ID
           name: id
           in: query
-  /api/topics/latest.json:
+  /topics/latest.json:
     get:
       responses:
         '200':
@@ -247,21 +247,21 @@ paths:
                     username:
                       type: string
                     website:
-                      type: string
+                      type: 'null'
                     github:
-                      type: string
+                      type: 'null'
                     psn:
-                      type: string
+                      type: 'null'
                     avatar_normal:
                       type: string
                     bio:
-                      type: string
+                      type: 'null'
                     url:
                       type: string
                     tagline:
-                      type: string
+                      type: 'null'
                     twitter:
-                      type: string
+                      type: 'null'
                     created:
                       type: number
                     avatar_large:
@@ -269,9 +269,9 @@ paths:
                     avatar_mini:
                       type: string
                     location:
-                      type: string
+                      type: 'null'
                     btc:
-                      type: string
+                      type: 'null'
                     id:
                       type: number
                   title: 发帖人信息
@@ -298,53 +298,50 @@ paths:
           examples:
             application/json:
               - node:
-                  avatar_large: //cdn.v2ex.com/navatar/94f6/d7e0/300_large.png?m=1574982810
-                  name: programmer
-                  avatar_normal: //cdn.v2ex.com/navatar/94f6/d7e0/300_normal.png?m=1574982810
-                  title: 程序员
-                  url: 'https://www.v2ex.com/go/programmer'
-                  topics: 34482
+                  avatar_large: //cdn.v2ex.com/navatar/c20a/d4d7/12_large.png?m=1575345595
+                  name: qna
+                  avatar_normal: //cdn.v2ex.com/navatar/c20a/d4d7/12_normal.png?m=1575345595
+                  title: 问与答
+                  url: 'https://www.v2ex.com/go/qna'
+                  topics: 144222
                   footer: ''
-                  header: 'While code monkeys are not eating bananas, they''re coding.'
-                  title_alternative: Programmer
-                  avatar_mini: //cdn.v2ex.com/navatar/94f6/d7e0/300_mini.png?m=1574982810
-                  stars: 6325
+                  header: 一个更好的世界需要你持续地提出好问题。
+                  title_alternative: Questions and Answers
+                  avatar_mini: //cdn.v2ex.com/navatar/c20a/d4d7/12_mini.png?m=1575345595
+                  stars: 2727
                   root: false
-                  id: 300
-                  parent_node_name: computer
+                  id: 12
+                  parent_node_name: v2ex
                 member:
-                  username: Mohanson
-                  website: 'http://accu.cc'
-                  github: ''
-                  psn: ''
-                  avatar_normal: //cdn.v2ex.com/avatar/1164/4d4c/234815_mini.png?m=1557382976
-                  bio: ''
-                  url: 'https://www.v2ex.com/u/Mohanson'
-                  tagline: ''
-                  twitter: ''
-                  created: 1497014862
-                  avatar_large: //cdn.v2ex.com/avatar/1164/4d4c/234815_mini.png?m=1557382976
-                  avatar_mini: //cdn.v2ex.com/avatar/1164/4d4c/234815_mini.png?m=1557382976
-                  location: ''
-                  btc: ''
-                  id: 234815
+                  username: Illyasvielvon
+                  website: null
+                  github: null
+                  psn: null
+                  avatar_normal: //cdn.v2ex.com/avatar/681e/eda4/454554_mini.png?m=1575356274
+                  bio: null
+                  url: 'https://www.v2ex.com/u/Illyasvielvon'
+                  tagline: null
+                  twitter: null
+                  created: 1574313664
+                  avatar_large: //cdn.v2ex.com/avatar/681e/eda4/454554_mini.png?m=1575356274
+                  avatar_mini: //cdn.v2ex.com/avatar/681e/eda4/454554_mini.png?m=1575356274
+                  location: null
+                  btc: null
+                  id: 454554
                 last_reply_by: ''
-                last_touched: 1575301253
-                title: 立个 Flag，不知道会不会杂技
-                url: 'https://www.v2ex.com/t/625300'
-                created: 1575301313
-                content: "看到 https://v2ex.com/t/625143 这个帖子，我想起今年自从 8 月份后我再也没有去学新东西了，一直在自己的舒适区呆着，整天碌碌无为混吃等死，这样下去不行的！人一懒惰就会坏掉！今年的目标基本在 12 月会完美收尾，因此我决定给来年立个 Flag: 看完并完全理解 golang 编译器的全部工作流程。\r\n\r\nFlag 一旦立起来，就会生长出一个守护灵，是有超自然效力的。这也是我喜欢插旗的原因。\r\n\r\n到时再来挖这个帖子的坟，应该不会杂技。"
-                content_rendered: |
-                  <p>看到 <a href="https://v2ex.com/t/625143" rel="nofollow">https://v2ex.com/t/625143</a> 这个帖子，我想起今年自从 8 月份后我再也没有去学新东西了，一直在自己的舒适区呆着，整天碌碌无为混吃等死，这样下去不行的！人一懒惰就会坏掉！今年的目标基本在 12 月会完美收尾，因此我决定给来年立个 Flag: 看完并完全理解 golang 编译器的全部工作流程。</p>
-                  <p>Flag 一旦立起来，就会生长出一个守护灵，是有超自然效力的。这也是我喜欢插旗的原因。</p>
-                  <p>到时再来挖这个帖子的坟，应该不会杂技。</p>
-                last_modified: 1575301313
+                last_touched: 1575342161
+                title: 想问一下，以后想从事 动漫 游戏 这种公司的程序员工作 要点什么技能点。。
+                url: 'https://www.v2ex.com/t/625514'
+                created: 1575356561
+                content: "今年刚本科毕业。。python c++用的多，现在刚开始 ROS 机器人 还有计算机视觉的一些模型开发。\r\n\r\n想为以后考虑以下，想进那种公司的现在开始 c++服务器端 分布式方面？"
+                content_rendered: 今年刚本科毕业。。python c++用的多，现在刚开始 ROS 机器人 还有计算机视觉的一些模型开发。<br /><br />想为以后考虑以下，想进那种公司的现在开始 c++服务器端 分布式方面？
+                last_modified: 1575356561
                 replies: 0
-                id: 625300
+                id: 625514
       tags:
         - Topic
       summary: 获取最新主题列表
-  /api/topics/hot.json:
+  /topics/hot.json:
     get:
       responses:
         '200':
@@ -468,11 +465,11 @@ paths:
                   created: 1532152966
                   avatar_large: //cdn.v2ex.com/avatar/f9ba/1f50/330562_mini.png?m=1574992209
                   avatar_mini: //cdn.v2ex.com/avatar/f9ba/1f50/330562_mini.png?m=1574992209
-                  location: CQ
+                  location: bhh
                   btc: ''
                   id: 330562
-                last_reply_by: lepig
-                last_touched: 1575300726
+                last_reply_by: djs
+                last_touched: 1575356505
                 title: 如何劝动老婆不要买 iPhone
                 url: 'https://www.v2ex.com/t/625138'
                 created: 1575274366
@@ -487,12 +484,12 @@ paths:
                   <p>目前我一直用华为，感觉挺好的。</p>
                   <p>我想给他买 mate 或 P。</p>
                 last_modified: 1575274366
-                replies: 164
+                replies: 259
                 id: 625138
       tags:
         - Topic
       summary: 获取热门主题列表
-  /api/topics/show.json:
+  /topics/show.json:
     get:
       responses:
         '200':
@@ -638,7 +635,7 @@ paths:
         - type: number
           name: id
           in: query
-  /api/replies/show.json:
+  /replies/show.json:
     get:
       responses:
         '200':
@@ -737,7 +734,7 @@ paths:
           description: 每页条数
           name: page_size
           in: query
-  /api/members/show.json:
+  /members/show.json:
     get:
       responses:
         '200':

@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format": "eslint . --fix",
     "test": "yarn run lint && cross-env TEST2DOC_ENV=test jest \"./(lib|spec)\"",
-    "example": "mocha ./example/mocha/**/*.spec.js"
+    "example": "mocha ./example/mocha/**/*.spec.js && jest ./example/jest"
   },
   "repository": {
     "type": "git",
