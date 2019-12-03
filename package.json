@@ -1,6 +1,6 @@
 {
   "name": "test2doc",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Build API docs from your tests",
   "main": "lib/index.js",
   "scripts": {
