@@ -1,5 +1,4 @@
 example
-test
 spec
 .travis.yml
 .eslintrc
@@ -7,3 +6,4 @@ spec
 .editorconfig
 jsconfig.json
 coverage
+*.test.js
