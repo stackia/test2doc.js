@@ -1,6 +1,6 @@
 {
   "name": "test2doc",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "description": "Build API docs from your tests",
   "main": "lib/index.js",
   "scripts": {
@@ -30,19 +30,19 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "cross-env": "^6.0.3",
+    "cross-env": "^7.0.2",
     "eslint": "^6.7.1",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "husky": "^3.1.0",
-    "jest": "^24.9.0",
-    "lint-staged": "^9.5.0",
-    "mocha": "^6.2.2",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "lint-staged": "^10.0.8",
+    "mocha": "^7.1.0",
     "prettier": "^1.19.1",
     "should": "^13.2.3",
     "supertest": "^4.0.2"
