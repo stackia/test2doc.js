@@ -1,6 +1,6 @@
 # test2doc.js - Build API docs from your tests
 
-[![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![Travis CI](https://travis-ci.org/stackia/test2doc.js.svg?branch=master)](https://travis-ci.org/stackia/test2doc.js) [![codecov](https://codecov.io/gh/stackia/test2doc.js/branch/master/graph/badge.svg)](https://codecov.io/gh/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/status.svg)](https://david-dm.org/stackia/test2doc.js) [![David](https://david-dm.org/stackia/test2doc.js/dev-status.svg)](https://david-dm.org/stackia/test2doc.js?type=dev) [![Gitter](https://img.shields.io/gitter/room/test2doc-js/Lobby.svg)](https://gitter.im/test2doc-js/Lobby)
+[![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![Travis CI](https://travis-ci.org/stackia/test2doc.js.svg?branch=master)](https://travis-ci.org/stackia/test2doc.js) [![codecov](https://codecov.io/gh/stackia/test2doc.js/branch/master/graph/badge.svg)](https://codecov.io/gh/stackia/test2doc.js) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=stackia/test2doc.js)](https://dependabot.com)
 
 test2doc.js helps you seamlessly integrate API documentation generation to your test flow.
 
@@ -14,14 +14,14 @@ require('should') // and use should as the assertion library
 // For Koa, you should exports app.listen() or app.callback() in your app entry
 const app = require('./my-express-app.js')
 
-after(function() {
+after(function () {
   doc.emit('api-documentation.apib') // Or doc.emit('api-documentation.yaml', 'swagger') if you like Swagger
 })
 
-doc.group('Products').is(doc => {
-  describe('#Products', function() {
-    doc.action('Get all products').is(doc => {
-      it('should get all products', function() {
+doc.group('Products').is((doc) => {
+  describe('#Products', function () {
+    doc.action('Get all products').is((doc) => {
+      it('should get all products', function () {
         // Write specs towards your API endpoint as you would normally do
         // Just decorate with some utility methods
         return request(app)
@@ -33,11 +33,11 @@ doc.group('Products').is(doc => {
                   10,
                   'Only products of which price >= this value should be returned'
                 )
-                .required()
+                .required(),
             })
           )
           .expect(200)
-          .then(res => {
+          .then((res) => {
             doc.resHeaders(res.headers)
             body = doc.resBody(res.body)
             body.desc('List of all products').should.not.be.empty()
