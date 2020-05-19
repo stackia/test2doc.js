@@ -12,30 +12,25 @@ doc
   .scheme('https', 'http')
   .host('jsonplaceholder.typicode.com')
 
-afterAll(function() {
+afterAll(function () {
   doc.emit(path.join(__dirname, 'jsonplaceholder.apib'), 'apib')
   doc.emit(path.join(__dirname, 'jsonplaceholder.yaml'), 'swagger')
 })
 
 const base = 'https://jsonplaceholder.typicode.com'
 
-describe('Post', function() {
+describe('Post', function () {
   doc
     .group('Post')
     .basePath('/posts')
     .desc('APIs related with posts')
-    .is(doc => {
-      test('GET /posts to get a list of all posts', async function() {
-        await doc.action('Get a list of all posts').is(async doc => {
-          let res = await request(base)
-            .get(doc.get('/posts'))
-            .expect(200)
+    .is((doc) => {
+      test('GET /posts to get a list of all posts', async function () {
+        await doc.action('Get a list of all posts').is(async (doc) => {
+          let res = await request(base).get(doc.get('/posts')).expect(200)
           let body = doc.resBody(res.body)
           expect(
-            body
-              .desc('List of all posts')
-              .limit(1)
-              .uncapture()
+            body.desc('List of all posts').limit(1).uncapture()
           ).toHaveLength(100)
           expect(
             typeof body[0].userId.desc('User id of the post').uncapture()
@@ -53,7 +48,7 @@ describe('Post', function() {
             .get(doc.get('/posts'))
             .query(
               doc.query({
-                userId: doc.val(2, 'Filter the post list by this user ID')
+                userId: doc.val(2, 'Filter the post list by this user ID'),
               })
             )
             .expect(200)
@@ -68,8 +63,8 @@ describe('Post', function() {
         })
       })
 
-      test('GET /posts/:id to get details of a post', async function() {
-        await doc.action('Get details of a post').is(async doc => {
+      test('GET /posts/:id to get details of a post', async function () {
+        await doc.action('Get details of a post').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/posts/:id', { id: doc.val(1, 'Post ID') }))
             .expect(200)

@@ -3,7 +3,7 @@ const Group = require('../lib/group')
 describe('API Blueprint generator', () => {
   test('should render a subset of an array if offset/limit is marked', () => {
     const doc = new Group()
-    doc.action('Sample Action').is(doc => {
+    doc.action('Sample Action').is((doc) => {
       doc.get('/user')
       doc
         .resBody([{ name: 'user1' }, { name: 'user2' }, { name: 'user3' }])
@@ -18,10 +18,10 @@ describe('API Blueprint generator', () => {
 
   test('should render 0, null, undefined, false and empty string correctly', () => {
     const doc = new Group()
-    doc.action('Sample Action').is(doc => {
+    doc.action('Sample Action').is((doc) => {
       doc.get('/user')
       doc.resBody(
-        [0, null, undefined, false, ''].map(value => {
+        [0, null, undefined, false, ''].map((value) => {
           return { name: value }
         })
       )
@@ -37,17 +37,17 @@ describe('API Blueprint generator', () => {
     const doc = new Group()
     doc
       .reqHeaders({
-        'x-group-common-header': '123'
+        'x-group-common-header': '123',
       })
       .action('Sample Action')
-      .is(doc => {
+      .is((doc) => {
         doc.get('/user')
         doc.reqHeaders({
-          'x-custom-request-header': 'foobar'
+          'x-custom-request-header': 'foobar',
         })
         doc.reqHeader('x-another-header', 'test')
         doc.resHeaders({
-          'set-cookie': ['foo=bar', 'abc=xyz']
+          'set-cookie': ['foo=bar', 'abc=xyz'],
         })
       })
     const output = doc.emit()
@@ -60,7 +60,7 @@ describe('API Blueprint generator', () => {
 
   test('should render response status code', () => {
     const doc = new Group()
-    doc.action('Sample Action').is(doc => {
+    doc.action('Sample Action').is((doc) => {
       doc.get('/user')
       doc.status(200)
       doc.anotherExample()
