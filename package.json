@@ -8,7 +8,7 @@
     "integration-test": "cross-env TEST2DOC_ENV=test jest ./spec",
     "lint": "eslint .",
     "format": "eslint . --fix",
-    "test": "yarn run lint && cross-env TEST2DOC_ENV=test jest \"./(lib|spec)\"",
+    "test": "npm run lint && cross-env TEST2DOC_ENV=test jest \"./(lib|spec)\"",
     "example": "mocha ./example/mocha/**/*.spec.js && jest ./example/jest"
   },
   "repository": {
