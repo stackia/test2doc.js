@@ -3,8 +3,8 @@ node_js:
   - 'node'
   - '10.14'
 install:
-  - yarn global add @commitlint/travis-cli codecov
+  - yarn global add @commitlint/travis-cli coveralls
   - yarn
 script:
-  - 'commitlint-travis && yarn test --coverage && codecov'
+  - 'commitlint-travis && yarn test --coverage && coveralls < coverage/lcov.info'
 cache: yarn
