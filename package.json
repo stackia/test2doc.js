@@ -4,11 +4,11 @@
   "description": "Build API docs from your tests",
   "main": "lib/index.js",
   "scripts": {
-    "unit-test": "cross-env TEST2DOC_ENV=test jest ./lib",
-    "integration-test": "cross-env TEST2DOC_ENV=test jest ./spec",
+    "unit-test": "jest ./lib",
+    "integration-test": "jest ./spec",
     "lint": "eslint .",
     "format": "eslint . --fix",
-    "test": "npm run lint && cross-env TEST2DOC_ENV=test jest \"./(lib|spec)\"",
+    "test": "npm run lint && jest \"./(lib|spec)\"",
     "example": "mocha ./example/mocha/**/*.spec.js && jest ./example/jest"
   },
   "repository": {
@@ -30,9 +30,8 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "cross-env": "^7.0.2",
-    "eslint": "^7.2.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.13.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.0.0",
@@ -40,8 +39,8 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
-    "jest": "^26.0.1",
-    "lint-staged": "^10.2.10",
+    "jest": "^26.5.3",
+    "lint-staged": "^10.4.1",
     "mocha": "^8.0.1",
     "prettier": "^2.0.5",
     "should": "^13.2.3",
@@ -56,6 +55,11 @@
   },
   "engines": {
     "node": ">= 10.14"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest-setup.js"
+    ]
   },
   "lint-staged": {
     "*.js": [
