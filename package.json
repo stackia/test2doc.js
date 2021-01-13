@@ -30,14 +30,13 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "eslint": "^7.11.0",
-    "eslint-config-prettier": "^6.13.0",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
     "eslint-config-standard": "^16.0.1",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
     "jest": "^26.5.3",
     "lint-staged": "^10.4.1",
@@ -48,7 +47,7 @@
   },
   "dependencies": {
     "clone": "^2.1.0",
-    "js-yaml": "^3.14.0",
+    "js-yaml": "^4.0.0",
     "methods": "^1.1.2",
     "path-to-regexp": "^6.1.0",
     "symbol-description": "^1.0.0"
