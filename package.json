@@ -39,7 +39,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "husky": "^6.0.0",
     "jest": "^26.5.3",
-    "lint-staged": "^10.4.1",
+    "lint-staged": "^11.0.0",
     "mocha": "^8.0.1",
     "prettier": "^2.0.5",
     "should": "^13.2.3",
