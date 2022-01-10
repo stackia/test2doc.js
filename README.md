@@ -1,6 +1,6 @@
 # test2doc.js - Build API docs from your tests
 
-[![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![Travis CI](https://travis-ci.org/stackia/test2doc.js.svg?branch=master)](https://travis-ci.org/stackia/test2doc.js) [![Coverage Status](https://coveralls.io/repos/github/stackia/test2doc.js/badge.svg)](https://coveralls.io/github/stackia/test2doc.js)
+[![npm](https://img.shields.io/npm/l/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![npm](https://img.shields.io/npm/v/test2doc.svg)](https://www.npmjs.com/package/test2doc) [![CI](https://github.com/stackia/test2doc.js/actions/workflows/ci.yml/badge.svg)](https://github.com/stackia/test2doc.js/actions/workflows/ci.yml) [![Coverage Status](https://coveralls.io/repos/github/stackia/test2doc.js/badge.svg)](https://coveralls.io/github/stackia/test2doc.js)
 
 test2doc.js helps you seamlessly integrate API documentation generation to your test flow.
 
