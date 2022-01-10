@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 const Group = require('../lib/group')
 
 describe('Swagger specification generator', () => {

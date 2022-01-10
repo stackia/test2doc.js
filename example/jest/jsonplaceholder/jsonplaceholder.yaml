@@ -39,7 +39,7 @@ paths:
       tags:
         - Post
       summary: Get a list of all posts
-  '/posts/{id}':
+  /posts/{id}:
     get:
       responses:
         '200':

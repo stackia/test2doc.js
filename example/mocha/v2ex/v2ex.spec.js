@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
 const path = require('path')
 const request = require('supertest')
 require('should')
 
-const doc = require('../../../')
+const doc = require('../../..')
 
 doc
   .title('V2EX 非官方 API 列表')
@@ -15,20 +16,20 @@ doc
   .host('www.v2ex.com')
   .basePath('/api')
 
-after(function () {
+after(() => {
   doc.emit(path.join(__dirname, 'v2ex.apib'), 'apib')
   doc.emit(path.join(__dirname, 'v2ex.yaml'), 'swagger')
 })
 
 const base = 'https://www.v2ex.com'
 
-describe('Site', function () {
+describe('Site', () => {
   doc
     .group('Site')
     .basePath('/site')
     .desc('网站相关接口')
     .is((doc) => {
-      it('should provide /api/site/info.json', async function () {
+      it.only('should provide /api/site/info.json', async () => {
         await doc.action('获取网站信息').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/api/site/info.json'))
@@ -41,7 +42,7 @@ describe('Site', function () {
         })
       })
 
-      it('should provide /api/site/stats.json', async function () {
+      it('should provide /api/site/stats.json', async () => {
         await doc.action('获取网站状态').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/api/site/stats.json'))
@@ -52,7 +53,7 @@ describe('Site', function () {
         })
       })
 
-      it('should not provide /api/site/livid.json', async function () {
+      it('should not provide /api/site/livid.json', async () => {
         await doc
           .action('获取 Livid 个人资料')
           .desc('这是一个不存在的接口，用来测试 404。')
@@ -65,13 +66,13 @@ describe('Site', function () {
     })
 })
 
-describe('Node', function () {
+describe('Node', () => {
   doc
     .group('Node')
     .basePath('/nodes')
     .desc('节点相关接口')
     .is((doc) => {
-      it('should provide /api/nodes/all.json', async function () {
+      it('should provide /api/nodes/all.json', async () => {
         await doc.action('获取所有节点列表').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/api/nodes/all.json'))
@@ -83,7 +84,7 @@ describe('Node', function () {
         })
       })
 
-      it('should provide /api/nodes/show.json', async function () {
+      it('should provide /api/nodes/show.json', async () => {
         await doc
           .action('获取指定节点信息')
           .desc('节点 ID 和节点名两个参数二选一。')
@@ -109,13 +110,13 @@ describe('Node', function () {
     })
 })
 
-describe('Topic', function () {
+describe('Topic', () => {
   doc
     .group('Topic')
     .basePath('/topics')
     .desc('主题相关接口')
     .is((doc) => {
-      it('should provide /api/topics/latest.json', async function () {
+      it('should provide /api/topics/latest.json', async () => {
         await doc.action('获取最新主题列表').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/api/topics/latest.json'))
@@ -126,7 +127,7 @@ describe('Topic', function () {
         })
       })
 
-      it('should provide /api/topics/hot.json', async function () {
+      it('should provide /api/topics/hot.json', async () => {
         await doc.action('获取热门主题列表').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/api/topics/hot.json'))
@@ -136,7 +137,7 @@ describe('Topic', function () {
         })
       })
 
-      it('should provide /api/topics/show.json', async function () {
+      it('should provide /api/topics/show.json', async () => {
         await doc
           .action('获取指定主题信息')
           .desc('参数四选一。')
@@ -170,13 +171,13 @@ describe('Topic', function () {
     })
 })
 
-describe('Replies', function () {
+describe('Replies', () => {
   doc
     .group('Replies')
     .basePath('/replies')
     .desc('主题回复相关接口')
     .is((doc) => {
-      it('should provide /api/replies/show.json', async function () {
+      it('should provide /api/replies/show.json', async () => {
         await doc.action('获取指定主题的所有回复列表').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/api/replies/show.json'))
@@ -196,13 +197,13 @@ describe('Replies', function () {
     })
 })
 
-describe('Members', function () {
+describe('Members', () => {
   doc
     .group('Members')
     .basePath('/members')
     .desc('用户相关接口')
     .is((doc) => {
-      it('should provide /api/members/show.json', async function () {
+      it('should provide /api/members/show.json', async () => {
         await doc.action('获取指定主题的所有回复列表').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/api/members/show.json'))

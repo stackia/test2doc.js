@@ -1,7 +1,8 @@
+/* eslint-disable no-shadow */
 const path = require('path')
 const request = require('supertest')
 
-const doc = require('../../../')
+const doc = require('../../..')
 
 doc
   .title('JSONPlaceholder API Documentation')
@@ -12,20 +13,20 @@ doc
   .scheme('https', 'http')
   .host('jsonplaceholder.typicode.com')
 
-afterAll(function () {
+afterAll(() => {
   doc.emit(path.join(__dirname, 'jsonplaceholder.apib'), 'apib')
   doc.emit(path.join(__dirname, 'jsonplaceholder.yaml'), 'swagger')
 })
 
 const base = 'https://jsonplaceholder.typicode.com'
 
-describe('Post', function () {
+describe('Post', () => {
   doc
     .group('Post')
     .basePath('/posts')
     .desc('APIs related with posts')
     .is((doc) => {
-      test('GET /posts to get a list of all posts', async function () {
+      test('GET /posts to get a list of all posts', async () => {
         await doc.action('Get a list of all posts').is(async (doc) => {
           let res = await request(base).get(doc.get('/posts')).expect(200)
           let body = doc.resBody(res.body)
@@ -63,7 +64,7 @@ describe('Post', function () {
         })
       })
 
-      test('GET /posts/:id to get details of a post', async function () {
+      test('GET /posts/:id to get details of a post', async () => {
         await doc.action('Get details of a post').is(async (doc) => {
           const res = await request(base)
             .get(doc.get('/posts/:id', { id: doc.val(1, 'Post ID') }))

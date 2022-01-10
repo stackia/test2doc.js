@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "format": "eslint . --fix",
     "test": "npm run lint && jest \"./(lib|spec)\"",
-    "example": "mocha ./example/mocha/**/*.spec.js && jest ./example/jest"
+    "example": "mocha ./example/mocha/**/*.spec.js && jest ./example/jest",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -28,29 +29,30 @@
   },
   "homepage": "https://github.com/stackia/test2doc.js#readme",
   "devDependencies": {
-    "@commitlint/cli": "^16.0.1",
+    "@commitlint/cli": "^16.0.2",
     "@commitlint/config-conventional": "^16.0.0",
-    "eslint": "^7.17.0",
-    "eslint-config-prettier": "^8.0.0",
-    "eslint-config-standard": "^16.0.1",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-node": "^11.0.0",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "husky": "^7.0.0",
-    "jest": "^27.0.1",
-    "lint-staged": "^12.1.2",
-    "mocha": "^9.0.0",
-    "prettier": "^2.3.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.7",
+    "lint-staged": "^12.1.7",
+    "mocha": "^9.1.3",
+    "prettier": "^2.5.1",
     "should": "^13.2.3",
-    "supertest": "^6.0.1"
+    "supertest": "^6.1.6"
   },
   "dependencies": {
     "clone": "^2.1.0",
-    "js-yaml": "^4.0.0",
+    "js-yaml": "^4.1.0",
     "methods": "^1.1.2",
-    "path-to-regexp": "^6.1.0",
-    "symbol-description": "^1.0.0"
+    "path-to-regexp": "^6.2.0",
+    "symbol-description": "^1.1.0"
   },
   "engines": {
     "node": ">= 10.14"
@@ -61,16 +63,7 @@
     ]
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
+    "*.js": "eslint --cache --fix"
   },
   "prettier": {
     "singleQuote": true,
@@ -79,12 +72,15 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "standard",
+      "airbnb",
       "plugin:prettier/recommended"
     ],
     "env": {
       "jest": true,
       "mocha": true
+    },
+    "rules": {
+      "no-restricted-syntax": "off"
     }
   },
   "commitlint": {
