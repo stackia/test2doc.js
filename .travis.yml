@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - 'node'
-  - '10.14'
-install:
-  - npm install -g coveralls
-  - npm install
-script:
-  - 'npm test -- --coverage && coveralls < coverage/lcov.info'
