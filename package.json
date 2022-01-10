@@ -55,7 +55,7 @@
     "symbol-description": "^1.1.0"
   },
   "engines": {
-    "node": ">= 10.14"
+    "node": ">= 12.22.0"
   },
   "jest": {
     "setupFiles": [
