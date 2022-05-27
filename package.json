@@ -30,7 +30,7 @@
   "homepage": "https://github.com/stackia/test2doc.js#readme",
   "devDependencies": {
     "@commitlint/cli": "^17.0.1",
-    "@commitlint/config-conventional": "^16.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
     "eslint": "^8.6.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
